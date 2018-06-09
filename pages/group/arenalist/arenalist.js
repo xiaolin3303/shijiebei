@@ -2,6 +2,7 @@
 //获取应用实例
 const Host = require("../../../config/host.config");
 const username = wx.getStorageSync('username');
+const getData = require("../../../model/dataModel");
 const app = getApp();
 
 Page({
@@ -51,23 +52,16 @@ Page({
       }
     })
 
-    const battleUrl = `${Host.service}/GetBattleInfo?`;
-    wx.request({
-      url:battleUrl,
-      method: 'get',
-      data: {
+    const battleUrl = `${Host.service}/GetBattleInfo`;
+
+    getData(
+      battleUrl,
+      {
         groupId,
       },
-      success: (res) => {
-        // res.data.data.push({
-        //   battle_desc: '两牙之争',
-        //   battle_id: 1,
-        //   status: 2,
-        //   picture: "http://yyb.gtimg.com/fibadcms_img/adcms/91ebdb3ff81fd0e3b70af866b5640d951528362644269391.png",
-        //   begin_time: '2018-06-06 12:00:00',
-        //   deadline: '2018-06-14 21:00:00'
-        // });
-        res.data.data = res.data.data.map(battle => {
+      'get',
+      (res) => {
+        res.data = res.data.map(battle => {
           const { begin_time, deadline } = battle
           let startDate = new Date(begin_time);
           let endDate = new Date(deadline);
@@ -80,9 +74,9 @@ Page({
           });
         });
         this.setData({
-            battleList: res.data.data
+            battleList: res.data
         })
-        if (res.data.ret == -102) {
+        if (res.ret == -102) {
           wx.showToast({
             title: '您没有权限，请联系管理员开通',  //标题  
             width: 200,
@@ -90,17 +84,16 @@ Page({
             mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false  
           })
         }
-        // console.log(res.data.data)
       }
-    })
+    );
   },
 
   gotoTopic :function(e){
 
-    const { status } = e.currentTarget.dataset
+    const { status,battleid } = e.currentTarget.dataset
     if (status == 1 || status == 2) {    
       wx.navigateTo({
-        url: `../topic/topic?battleId=${this.data.battleId}`
+        url: `../topic/topic?battleId=${battleid}`
       })
     }
   },

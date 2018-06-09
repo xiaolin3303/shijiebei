@@ -168,6 +168,7 @@ Page({
       })
 
   },
+
   submitGroupRes:function(e){
     // let getGroupListData = this.getGroupListData
     let answerList = [];
@@ -211,9 +212,9 @@ Page({
           })
         }
 
-        if (res.ret != -1) {
+        if (res.data.ret == 0) {
           wx.showToast({
-            title: '成功',
+            title: "成功",
             icon: 'success',  //图标，支持"success"、"loading"
             mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
           })
@@ -222,7 +223,7 @@ Page({
           })
         } else {
           wx.showToast({
-            title: '失败',
+            title: res.data.msg,
             icon: 'none',  //图标，支持"success"、"loading"
             mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
           })

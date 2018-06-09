@@ -71,3 +71,10 @@
 	background : #edeef2;
 	color :#858688;
 }
+.caption-figure.gray-icon{
+	width:225rpx;
+	height:54rpx;
+	display:block;
+
+
+}

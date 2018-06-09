@@ -75,7 +75,7 @@
 					"id": 6,
 					"name": "题目",
 					"pathName": "pages/group/topic/topic",
-					"query": "battleId=1"
+					"query": ""
 				},
 				{
 					"id": 8,

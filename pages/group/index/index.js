@@ -1,12 +1,13 @@
 //index.js
 //获取应用实例
 const app = getApp();
-const getData = require("../../../model/dataModel");
+
 const Host = require("../../../config/host.config"); 
 const username = wx.getStorageSync('username');
 // const avatar = wx.getStorageSync('avatar');
 // const userInfo = { avatarUrl: avatar}
 const userInfo = wx.getStorageSync('userInfo');
+const getData = require("../../../model/dataModel");
 const sepcTime = require("../../../config/specTimeConfig");
 
 Page({
@@ -57,26 +58,26 @@ Page({
 
 
   getGroupInfo:function(groupId, groupLeader, finishCb){
-    let params = {
+    let data = {
       userId: username
     }
 
     if (groupId) {
-      params.groupId = groupId
+      data.groupId = groupId
     }
 
-    const url = `${Host.service}/GetGroupInfo`;
-      wx.request({
-        url,
-        method: 'get',
-        data: params,
-        success: (res) => {
-
-          if(!res.data.data){
+    const url = `${Host.service}/GetGroupInfo?`;
+    getData(
+      url,
+      data,
+      'get',
+      (res) => {
+          finishCb && finishCb()
+          if(!res.data){
             return 
           }
 
-          if (res.data.ret == -102) {
+          if (res.ret == -102) {
             wx.showToast({
               title: '您没有权限，请联系管理员开通',  //标题  
               width: 200,
@@ -85,7 +86,7 @@ Page({
             })
           }
 
-          let teamList  = res.data && res.data.data[1];
+          let teamList  = res && res.data[1];
           let buttonCnt = ''
 
           if(teamList.length < 4){
@@ -114,7 +115,7 @@ Page({
               teamList.length = 4 ;
               buttonCnt = ''
           }
-          let teamBase = res.data && res.data.data[0];
+          let teamBase = res && res.data[0];
           let isGroupLeader = (teamBase.groupLeader == username)
 
           this.setData({
@@ -126,11 +127,7 @@ Page({
             teamBase,
             buttonCnt
           })
-        },
-        complete: function () {
-          finishCb && finishCb()
-        }
-      })
+        })
   },
 
   inviteFriends: function(e){

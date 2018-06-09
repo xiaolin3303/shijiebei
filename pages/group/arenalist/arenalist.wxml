@@ -2,17 +2,17 @@
 <view class="arenalist-wrapper ft25">
   <view class="arena-list">
 
-  <view class="arena-box"  bindtap="gotoTopic" wx:for="{{battleList}}" wx:for-index="index" wx:for-item="battle" wx:key="battle" data-status="{{battle.status}}"> 
+  <view class="arena-box"  bindtap="gotoTopic" wx:for="{{battleList}}" wx:for-index="index" wx:for-item="battle" wx:key="battle" data-status="{{battle.status}}" data-battleid="{{battle.battle_id}}"> 
     <view class="arena-item {{battle.status == 1? 'active' : ''}}"  disabled="{{battle.status == 2}}">
       <view class="box">
         <view class="tac">
-          <image wx:if="{{battle.status === 1}}"  class="lock icon mr5" src="/assets/icons/open.png"></image>
+          <image wx:if="{{battle.status === 1}}"  class="lock icon mr5 " src="/assets/icons/open.png"></image>
           <image wx:else class="lock icon mr5" src="/assets/icons/close.png"></image>
           <text class="ft14 {{battle.status === 1 ? 'ftstress' : ''}}">{{battle.status == 1 ? '已开启' : (battle.status == 0 ? "待开启" : "已结束")}}
           </text>
         </view>
         
-        <image src="{{battle.picture}}" class="mt5 caption-figure {{battle.status == 1 ? 'active' : ''}} {{battle.status !== 2 ? 'middle' : ''}}"></image>
+        <image src="{{battle.status == 1 ? battle.picture : battle.grayPicture}}" class="mt5 caption-figure {{battle.status == 1 ? 'active' : ''}} {{battle.status == 0 ? 'gray-icon' : '' }}  {{battle.status !== 2 ? 'middle' : ''}}"></image>
         <view class="row ft20 {{battle.status == 2 ?  '' : 'none'}}">
           <view class="col">
               <view class="tac">队伍积分</view>

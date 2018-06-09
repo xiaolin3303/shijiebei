@@ -35,7 +35,8 @@ Page({
     groupId : '',
     isChoosed : false,
     isAlive : true,
-    battleId : ''
+    battleId : '',
+    battleInfo: []
   },
 
   onLoad: function (opt) {
@@ -55,13 +56,14 @@ Page({
     getData(
       betUrl,
       {
-        user_id: username,
+        userId: username,
         battleId,
         roundsId
       },
       'get',
       (res) => {
         const blist  = res.data.bList;
+        const battleInfo = res.data.battleInfo;
         const pList = res.data.qList.map(item => {
           let answerSummary = Object.keys(item.answerSummary).map(key => ({
             answer_id: +key,
@@ -101,7 +103,8 @@ Page({
 
         this.setData({
           matchInfo,
-          pList
+          pList,
+          battleInfo
         })
       }
     );
@@ -167,10 +170,14 @@ Page({
 
   selectTab: function (e) {
 
-    const { roundsid } = e.currentTarget.dataset;
-    const {battleId} = this.data;
+    const { roundsid ,status} = e.currentTarget.dataset;
+    const { battleId } = this.data;
 
+    if( status == 0){
+      return 
+    }
     this.getGroupBetList(battleId,roundsid);
+
 
     this.setData({
       currentTab: roundsid
