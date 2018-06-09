@@ -7,55 +7,67 @@
   </navtab>
 
   <view class = "{{currentTab == 0 ? '' : 'none' }}" style="margin-top:92rpx;">
-    <view class="tac ft35 fcwhite" style="padding-top :15px;font-size:15px;">比赛结束</view>
-    <view class="group-match-list" style="padding-bottom: 0">
-      <view class="match"  wx:for="{{groupListData}}" wx:for-index="index" wx:for-item="group" wx:key="group" wx:if="{{group.ban_play === 1}}">
-        <view class="box">
-          <view class="item-group">
-            <view>{{group.group_id}}</view>
-            <view>组</view>
-          </view>
-          <!-- <image class="subscript" src="/assets/icons/jiaobiao.png"></image> -->
-          <view class="item" style="justify-content: flex-start; padding-left: 20rpx">
-            <view class="country">
-              <text>{{group.team_name1}}</text>
-              <image src="{{group.team_url1}}" class="icon national-flag flag-right"></image>
+    <block wx:if="{{banGroupList.length}}">
+      <view class="tac ft35 fcwhite" style="padding-top :15px;font-size:15px;">比赛结束</view>
+      <view class="group-match-list" style="padding-bottom: 0">
+        <view class="match"  wx:for="{{displayBanGroup}}" wx:for-index="index" wx:for-item="group" wx:key="group" wx:if="{{group.ban_play === 1}}">
+          <view class="box">
+            <view class="item-group">
+              <view>{{group.group_id}}</view>
+              <view>组</view>
             </view>
-          </view>
-          <view class="item vs">
-            <view class="country">
-              <image src="/assets/icons/vs-icon.png" class="icon vs"></image>
-            </view>
-          </view>
-            <view class="item" style="justify-content: flex-end; padding-right: 20rpx">
+            <!-- <image class="subscript" src="/assets/icons/jiaobiao.png"></image> -->
+            <view class="item" style="justify-content: flex-start; padding-left: 20rpx">
               <view class="country">
-              <image src="{{group.team_url2}}" class="icon national-flag flag-left"></image>
-              <text>{{group.team_name2}}</text>
+                <text>{{group.team_name1}}</text>
+                <image src="{{group.team_url1}}" class="icon national-flag flag-right"></image>
+              </view>
+            </view>
+            <view class="item vs">
+              <view class="country">
+                <image src="/assets/icons/vs-icon.png" class="icon vs"></image>
+              </view>
+            </view>
+              <view class="item" style="justify-content: flex-end; padding-right: 20rpx">
+                <view class="country">
+                <image src="{{group.team_url2}}" class="icon national-flag flag-left"></image>
+                <text>{{group.team_name2}}</text>
+              </view>
             </view>
           </view>
-        </view>
-        <view class="box" >
-          <view class="item" wx:for="{{group.answerlist}}" wx:for-index="i" wx:for-item="answer" wx:key="answer">
-            <view 
-              class="frist-victory select-btn {{quizRes[group.item_id].answerid === answer.answer_id ? 'res-active' :  ''}} {{ group.win_team !==0 && group.win_team === answer.answer_id?'res-correct':'' }} {{ group.player_answer_id === answer.answer_id ? 'res-active':'' }} {{ group.win_team !==0 && group.win_team !== group.player_answer_id && group.player_answer_id === answer.answer_id ? 'res-wrong' : '' }}"
-              data-odd    = "{{answer.odd}}"
-              data-itemid  = "{{group.item_id}}"
-              data-answerid   = "{{answer.answer_id}}"
-              data-lockanswer = "{{group.ban_play === 1}}"
-              bindtap      = "handleQuizResult">
-              <view>{{answer.answe_describe}}</view>
-              <view>{{answer.odd}}</view>
+          <view class="box" >
+            <view class="item" wx:for="{{group.answerlist}}" wx:for-index="i" wx:for-item="answer" wx:key="answer">
+              <view 
+                class="frist-victory select-btn {{quizRes[group.item_id].answerid === answer.answer_id ? 'res-active' :  ''}} {{ group.win_team !==0 && group.win_team === answer.answer_id?'res-correct':'' }} {{ group.player_answer_id === answer.answer_id ? 'res-active':'' }} {{ group.win_team !==0 && group.win_team !== group.player_answer_id && group.player_answer_id === answer.answer_id ? 'res-wrong' : '' }}"
+                data-odd    = "{{answer.odd}}"
+                data-itemid  = "{{group.item_id}}"
+                data-answerid   = "{{answer.answer_id}}"
+                data-lockanswer = "{{group.ban_play === 1}}"
+                bindtap      = "handleQuizResult">
+                <view>{{answer.answe_describe}}</view>
+                <view>{{answer.odd}}</view>
+              </view>
             </view>
           </view>
-        </view>
-        <view class="item-bottom">
-          <view class=" tip-msg" style="color: #1f663b;">
-            获胜国家：{{group.team_name1}}
+          <view class="item-bottom">
+            <view class=" tip-msg" style="color: #1f663b;">
+              获胜国家：{{group.team_name1}}
+            </view>
+            <view class="forecast-score">实际得分:{{quizRes[group.item_id].forecastScore || '0'}}</view>
           </view>
-          <view class="forecast-score">实际得分:{{quizRes[group.item_id].forecastScore || '0'}}</view>
         </view>
+        <block wx:if="banGroupList.length > 1">
+        <view class="mt20 tac ft14 fcwhite" style="padding-bottom:30rpx" wx:if="{{showMoreBanGroup === false}}" bindtap="showMoreBanGroup">
+          查看更多
+          <image class="icon" src="/assets/down-arrow.png" style="width:30rpx;height:30rpx"></image>
+        </view>
+        <view class="mt20 tac ft14 fcwhite" style="padding-bottom:30rpx" wx:else bindtap="hideBanGroup">
+          收起
+          <image class="icon" src="/assets/up-arrow.png" style="width:30rpx;height:30rpx"></image>          
+        </view>
+        </block>
       </view>
-    </view>
+    </block>
 
     <view class="tac fcwhite ft15">竞猜中</view>
     <view class="group-match-list">
