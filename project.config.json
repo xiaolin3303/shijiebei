@@ -57,7 +57,7 @@
 					"id": 3,
 					"name": "邀请好友",
 					"pathName": "pages/group/index/index",
-					"query": "groupId=9283"
+					"query": ""
 				},
 				{
 					"id": -1,

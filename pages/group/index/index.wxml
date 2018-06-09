@@ -1,7 +1,7 @@
 <!--personal.wxml-->
 <view class="group-index-wrapper ft30">
   <image src="/assets/head.jpg" class="banner"></image>
-  <view class="instruction fwhite ft15">玩法介绍及奖品 ></view>
+  <view class="instruction fwhite ft15" bindtap="gotoStruction">玩法介绍及奖品 ></view>
   <view class="create-name-wrapper">
   <block wx:if="{{!groupName}}">
     <view class="tac mt20 ft40 fwbold">
@@ -11,7 +11,7 @@
       <view class="col">
         <input class="name-input mr20" placeholder-class="name-inputp-tip" placeholder="为队伍起名(不超过5字符)" bindinput="createGroupName" />
       </view>
-      <view class="col-auto ft35" style="color:#339a58;" bindtap="confirmGroupName">确定</view> 
+      <view class="col-auto ft35" style="color:#339a58;"  bindtap="confirmGroupName">确定</view> 
     </view>
     <view class="groupeer-list">
       <view class="userinfo">
@@ -54,7 +54,7 @@
   <view class="btn-wrapper">
 
     <view class= "{{buttonCnt === 'invite'  || isGroupLeader && buttonCnt !== 'goanena'  && buttonCnt !== 'undergoing' ? '':'none'}}">
-      <button class="invite-btn " open-type="share">
+      <button class="invite-btn " open-type="share" bindtap="inviteFriends">
       邀请好友</button>
       <view class=" ft11 tac mt20 wrapper-tip" style='bottom:-10rpx;'>自由组队时间将于6月14日18点整结束</view>
       <view class=" ft11 tac mb20 wrapper-tip" style='bottom:-10rpx;'>未组队成功人员系统将智能匹配</view>
