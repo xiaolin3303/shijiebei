@@ -44,13 +44,19 @@ Page({
   },
 
   onLoad: function (opt) {
-
-
     const { groupId,groupName } = opt
     this.getGroupInfo(groupId,groupName);
   },
 
-  getGroupInfo:function(groupId,groupLeader){
+  onPullDownRefresh: function (e) {
+    const { groupId, groupName } = this.data
+    this.getGroupInfo(groupId, groupName, () => {
+      wx.stopPullDownRefresh()
+    });
+  },
+
+
+  getGroupInfo:function(groupId, groupLeader, finishCb){
     let params = {
       userId: username
     }
@@ -120,7 +126,9 @@ Page({
             teamBase,
             buttonCnt
           })
-
+        },
+        complete: function () {
+          finishCb && finishCb()
         }
       })
   },

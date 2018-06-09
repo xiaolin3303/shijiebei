@@ -26,16 +26,23 @@ Page({
     this.getGroupListData();
   },
 
-  getGroupListData() {
+  onPullDownRefresh: function (e) {
+    this.getGroupListData(() => {
+      wx.stopPullDownRefresh()
+    });
+  },
+
+  getGroupListData(finishCb) {
 
     const url = `${Host.service}/GetBetList?`;
     getData(
       url,
       {
-        user_id: username
+        user_id: username || 'viinyxu'
       },
       'get',
       (res) => {
+        finishCb && finishCb()
         if (res.data.ret == -102) {
           wx.showToast({
             title: '您没有权限，请联系管理员开通',  //标题
@@ -165,29 +172,30 @@ Page({
     // let getGroupListData = this.getGroupListData
     let answerList = [];
     const { quizRes } = this.data;
-    answerList = Object.keys(quizRes).map(key=>{
+    // 过滤掉close=true的结果
+    answerList = Object.keys(quizRes).filter(key => !quizRes[key].closed).map(key=>{
         let item ={
-            item_id : parseInt(key),
+            item_id : +key,
             answer_id : quizRes[key].answerid
         }
         return item
     });
 
-    const groupRes = this.data.groupListData.map(group => {
-      if (group.player_answer_id !== 0) {
-        answerList.push({
-          item_id: parseInt(group.item_id),
-          answer_id: group.player_answer_id
-        })
-      }
-    })
+    // const groupRes = this.data.groupListData.map(group => {
+    //   if (group.player_answer_id !== 0) {
+    //     answerList.push({
+    //       item_id: parseInt(group.item_id),
+    //       answer_id: group.player_answer_id
+    //     })
+    //   }
+    // })
 
     const url = `${Host.service}/InsertBet?`;
     wx.request({
       url,
       method: 'post',
       data: {
-        user_id: username,
+        user_id: username || 'viinyxu',
         answerList: JSON.stringify(answerList)
       },
       header: {
