@@ -4,6 +4,7 @@
 const app = getApp();
 const Host = require("../../../config/host.config"); 
 const username = wx.getStorageSync('username');
+const getData = require("../../../model/dataModel");
 
 Page({
   data: {
@@ -32,29 +33,36 @@ Page({
       'selectAnswerId': -1
     },
     groupId : '',
-    isChoosed : false
+    isChoosed : false,
+    isAlive : true,
+    battleId : ''
+  },
+
+  onLoad: function (opt) {
+
+    const {battleId} = opt ;
+    this.setData({
+      battleId
+    })
+    this.getGroupBetList(battleId ,1);
+    this.getGroupInfo();
 
   },
 
-  onLoad: function () {
+  getGroupBetList: function(battleId,roundsId){
 
-    const betUrl = `${Host.service}/GetGroupBetList`;
-    wx.request({
-      url : betUrl,
-      method : 'get',
-      data :{
-        roundsId: 1,
-        battleId: 1 ,
-        userId : username 
+    const betUrl = `${Host.service}/GetGroupBetList?`;
+    getData(
+      betUrl,
+      {
+        user_id: username,
+        battleId,
+        roundsId
       },
-      header: { 
-        'content-type': 'application/x-www-form-urlencoded'
-      }, 
-      success: (res)=> {
-
-        //此处数据最好是后端处理，但是后端没有时间；
-        const blist  = res.data.data.bList;
-        const pList = res.data.data.qList.map(item => {
+      'get',
+      (res) => {
+        const blist  = res.data.bList;
+        const pList = res.data.qList.map(item => {
           let answerSummary = Object.keys(item.answerSummary).map(key => ({
             answer_id: +key,
             value: item.answerSummary[key]
@@ -96,19 +104,20 @@ Page({
           pList
         })
       }
-    })
+    );
+  },
 
-    const groupUrl = `${Host.service}/GetGroupInfo`;
+  getGroupInfo:function(){
 
-    wx.request({
-      url : groupUrl,
-      method: 'get',
-      data: {
+    const groupUrl = `${Host.service}/GetGroupInfo?`;
+    getData(
+      groupUrl,
+      {
         userId: username,
-        battleId: 0
       },
-      success: (res) => {
-        if (res.data.ret == -102) {
+      'get',
+      (res) => {
+        if (res.ret == -102) {
           wx.showToast({
             title: '您没有权限，请联系管理员开通',  //标题  
             width: 200,
@@ -117,12 +126,19 @@ Page({
           })
         }
 
+        const teamInfo = res.data;
+
+        const mystatus = teamInfo[1].filter(item => {
+            return item.userId == username
+        })
+
         this.setData({
-          teamInfo: res.data.data,
-          groupId : res.data.data[0].groupId
+          teamInfo,
+          groupId : teamInfo[0].groupId,
+          isAlive : mystatus[0].is_alive == 1
         })
       }
-    })
+    );
   },
 
   selectMatchAnswer: function (e) {
@@ -150,10 +166,14 @@ Page({
   },
 
   selectTab: function (e) {
-    return;
-    const { tabid } = e.currentTarget.dataset;
+
+    const { roundsid } = e.currentTarget.dataset;
+    const {battleId} = this.data;
+
+    this.getGroupBetList(battleId,roundsid);
+
     this.setData({
-      currentTab: tabid
+      currentTab: roundsid
     })
   },
 
@@ -201,7 +221,19 @@ Page({
       }, 
       data,
       success: (res) => {
-        console.log('xuxu',res)
+          if(res.data.ret == 0){
+            wx.showToast({
+              title: '恭喜！提交成功',
+              icon: 'none',  //图标，支持"success"、"loading"
+              mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
+            })
+          }else{
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',  //图标，支持"success"、"loading"
+              mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
+            })
+          }
       }
 
     })

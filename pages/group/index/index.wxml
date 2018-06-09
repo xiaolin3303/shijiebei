@@ -1,7 +1,7 @@
 <!--personal.wxml-->
 <view class="group-index-wrapper ft30">
   <image src="/assets/head.jpg" class="banner"></image>
-  <view class="instruction fwhite">玩法介绍及奖品 ></view>
+  <view class="instruction fwhite ft15">玩法介绍及奖品 ></view>
   <view class="create-name-wrapper">
   <block wx:if="{{!groupName}}">
     <view class="tac mt20 ft40 fwbold">
@@ -17,19 +17,19 @@
       <view class="userinfo">
         <view class="captain">队长</view>
         <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <view><text class="userinfo-nickname">{{username}}</text></view>
+        <view><text class="userinfo-nickname ft15">{{username}}</text></view>
       </view>
       <view class="userinfo">
         <image bindtap="bindViewTap" class="userinfo-avatar" src="/assets/default-avatar.png" mode="cover"></image>
-        <view><text class="userinfo-nickname">?</text></view>
+        <view><text class="userinfo-nickname ft15">?</text></view>
       </view>
       <view class="userinfo">
         <image bindtap="bindViewTap" class="userinfo-avatar" src="/assets/default-avatar.png" mode="cover"></image>
-        <view><text class="userinfo-nickname">?</text></view>
+        <view><text class="userinfo-nickname ft15">?</text></view>
       </view>
       <view class="userinfo">
         <image bindtap="bindViewTap" class="userinfo-avatar" src="/assets/default-avatar.png" mode="cover"></image>
-        <view><text class="userinfo-nickname">?</text></view>
+        <view><text class="userinfo-nickname ft15">?</text></view>
       </view>
     </view>
   </block>
@@ -45,34 +45,55 @@
       <view class="userinfo"  wx:for="{{teamList}}" wx:for-index="index" wx:for-item="number" wx:key="number">
         <view class="captain {{teamBase.groupLeader == number.userId ? '' : 'none'}}">队长</view>
         <image bindtap="bindViewTap" class="userinfo-avatar" src="{{number.avatar || '/assets/default-avatar.png'}}" mode="cover"></image>
-        <view><text class="userinfo-nickname">{{number.userId}}</text></view>
+        <view><text class="userinfo-nickname ft15 text-overflow" style="width:130rpx;display:inline-block;">{{number.userId || ''}}</text></view>
       </view>
     </view>
     </view>
 
   </block>
   <view class="btn-wrapper">
-    <view
-      class="invite-btn {{buttonCnt === 'invite'  || isGroupLeader && buttonCnt !== 'goanena'  ? '':'none'}}"
-      bindtap = "inviteFriends">
-        邀请好友
+
+    <view class= "{{buttonCnt === 'invite'  || isGroupLeader && buttonCnt !== 'goanena'  && buttonCnt !== 'undergoing' ? '':'none'}}">
+      <button class="invite-btn " open-type="share">
+      邀请好友</button>
+      <view class=" ft11 tac mt20 wrapper-tip" style='bottom:-10rpx;'>自由组队时间将于6月14日18点整结束</view>
+      <view class=" ft11 tac mb20 wrapper-tip" style='bottom:-10rpx;'>未组队成功人员系统将智能匹配</view>
     </view>
-    <view
-      class="invite-btn {{buttonCnt === 'join' && !isGroupLeader? '':'none'}}"
-      bindtap = "confirmJoinGroup">
-        确认加入
+
+    <view class="{{buttonCnt === 'join' && !isGroupLeader? '':'none'}}">    
+      <view
+        class="invite-btn"
+        bindtap = "confirmJoinGroup">
+          确认加入
+      </view>
+      <view class=" ft11 tac mt20 wrapper-tip" style='bottom:-10rpx;'>自由组队时间将于6月14日18点整结束</view>
+      <view class=" ft11 tac mb20 wrapper-tip" style='bottom:-10rpx;'>未组队成功人员系统将智能匹配</view>
     </view>
-        <view
-      class="invite-btn {{buttonCnt === 'goanena' ? '':'none'}}"
-      bindtap = "gotoAnera">
-        加入战场
+    
+    <view class= "{{buttonCnt === 'goanena' ? '':'none'}}">
+
+      <view
+        class="invite-btn"
+        bindtap = "gotoAnera">
+          选择战场
+      </view>
+      <view class=" ft11 tac wrapper-tip">每个队员积分将累积到战队成绩，影响整体排名</view>
     </view>
-  </view>
-  <view class=" ft30 tac mt20">自由组队时间将于6月14日18点整结束</view>
-  <view class=" ft30 tac mb20">未组队成功人员系统将智能匹配</view>
+
+    <view class= "{{buttonCnt === 'undergoing' ? '':'none'}}">
+
+      <view
+        class="invite-btn gray-btn"
+        bindtap = "gotoAnera">
+          即将开赛
+      </view>
+      <view class=" ft11 tac wrapper-tip">每个队员积分将累积到战队成绩，影响整体排名</view>
+    </view>
   </view>
 
-  <view class="ft30 tac bottom-tip">6月14日前完成组队，6月15日开始进入战场</view>
+  </view>
+
+  <view class="ft11 tac bottom-tip">6月14日前完成组队，6月15日开始进入战场</view>
 </view>
 
 <view class="tip-cover {{hasCover ? '' : 'none'}}"  bindtap="hideCover">

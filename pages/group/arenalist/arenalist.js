@@ -23,7 +23,9 @@ Page({
     })
   },
 
-  onLoad: function () {
+  onLoad: function (opt) {
+
+    const {groupId} = opt;
     const url = `${Host.service}/GetGroupInfo`;
     wx.request({
       url,
@@ -43,7 +45,8 @@ Page({
         }
         // console.log(res.data.data)
         this.setData({
-          teamInfo: res.data.data
+          teamInfo: res.data.data,
+          groupId
         })
       }
     })
@@ -53,7 +56,7 @@ Page({
       url:battleUrl,
       method: 'get',
       data: {
-        groupId:9115,
+        groupId,
       },
       success: (res) => {
         this.setData({

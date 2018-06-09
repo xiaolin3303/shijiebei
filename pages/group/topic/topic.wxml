@@ -1,7 +1,7 @@
 <!--personal.wxml-->
 <view class="topic-wrapper">
   <view class="tab row middle">
-    <view class="col tac item {{tab.id === currentTab ? 'active' : ''}}" wx:for="{{tabList}}" wx:for-item="tab" wx:key="tab.id" data-tabid="{{tab.id}}" bindtap="selectTab">
+    <view class="col tac item {{tab.id === currentTab ? 'active' : ''}}" wx:for="{{tabList}}" wx:for-item="tab" wx:key="tab.id" data-roundsid="{{tab.id}}" bindtap="selectTab">
       <image wx:if="{{tab.id === currentTab}}" src="/assets/icons/arrow-active.png" class="arrow"></image>
       <image wx:else src="/assets/icons/arrow.png" class="arrow"></image>              
       <view class="mt20 ft30 ml35">{{tab.caption}}</view>
@@ -33,7 +33,7 @@
       <view class="mt30 tip">预计得分:10</view>
     </view>
   </view>
-  <view class="tac mt40">
+  <view class="tac mt40" wx:if="{{isAlive}}">
     <view class="submit-btn" bindtap="submitAnswer">提交答案</view>
   </view>
   <view class="mt40 fixed">

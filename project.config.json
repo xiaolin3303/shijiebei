@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.0.8",
 	"appid": "wx5f7dbd4d9b3971eb",
-	"projectname": "newOne",
+	"projectname": "newOne1",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 6,
 			"list": [
 				{
 					"id": 0,
@@ -57,7 +57,7 @@
 					"id": 3,
 					"name": "邀请好友",
 					"pathName": "pages/group/index/index",
-					"query": ""
+					"query": "groupId=9283"
 				},
 				{
 					"id": -1,
@@ -66,16 +66,16 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "战场列表",
 					"pathName": "pages/group/arenalist/arenalist",
-					"query": ""
+					"query": "groupId=9283"
 				},
 				{
-					"id": -1,
+					"id": 6,
 					"name": "题目",
 					"pathName": "pages/group/topic/topic",
-					"query": ""
+					"query": "battleId=1"
 				},
 				{
 					"id": 8,

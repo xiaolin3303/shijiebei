@@ -1,14 +1,14 @@
 
 
-module.exports = function getData(url, params, msg, success, fail) {
+module.exports = function getData(url, params ,method, success, fail) {
 
     wx.showNavigationBarLoading();
 
     wx.showLoading({
-      title: msg || '正在加载' ,
+      title:  '正在加载' ,
     })
         
-    const method = Object.keys(params).length === 0 ? "get" : "post" 
+    //const method = Object.keys(params).length === 0 ? "get" : "post" 
 
   wx.request({
     url: url,
@@ -21,7 +21,7 @@ module.exports = function getData(url, params, msg, success, fail) {
     success: function (res) {
 
         wx.hideNavigationBarLoading();
-        msg && wx.hideLoading()
+        wx.hideLoading()
 
         if (res.statusCode == 200) {
             success && success(res.data)
