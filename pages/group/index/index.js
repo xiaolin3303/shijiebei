@@ -72,6 +72,7 @@ Page({
       data,
       'get',
       (res) => {
+        
           finishCb && finishCb()
           if(!res.data){
             return 
@@ -105,6 +106,13 @@ Page({
           }else if(teamList.length == 4){
 
                 const {isStartTime} = this.data;
+
+                wx.showToast({
+                  title: isStartTime.toString(),  //标题  
+                  width: 200,
+                  icon: 'success', 
+                  mask: false,  
+                })
                 if(isStartTime){
                   buttonCnt =  'goanena'
                 }else{
@@ -115,6 +123,7 @@ Page({
               teamList.length = 4 ;
               buttonCnt = ''
           }
+
           let teamBase = res && res.data[0];
           let isGroupLeader = (teamBase.groupLeader == username)
 
@@ -139,13 +148,6 @@ Page({
             content:'请先输入队名，创建队伍',
             showCancel: false,    
           }) 
-
-     }else{ 
-
-        this.setData({
-          hasCover : true
-        })
-
      }
   },
 
@@ -162,6 +164,15 @@ Page({
          groupName : this.data.inputValue,
          groupLeader : username,
          avatar : userInfo.avatarUrl
+      }
+      if(this.data.inputValue.length > 5 ){
+          wx.showToast({  
+            title: '战队名称不能超过5个字符，请重新输入',  
+            icon: 'none',   
+            mask: false,   
+          }) 
+
+          return
       }
 
       const url = `${Host.service}/makeGroup`;
@@ -253,5 +264,10 @@ Page({
       this.setData({
         hasCover : false
       })
+  },
+  gotoStruction: function(e){
+    wx.navigateTo({
+      url: '../../instruction/instruction'
+    })
   }
 })

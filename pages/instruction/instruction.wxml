@@ -4,11 +4,13 @@
     <view class="title ft17">俄罗斯世界杯 竞猜规则</view>
     <view class="ft12">
     <view class="mt40"><text class="fwbold">参与人员:</text></view>
+    <view >移动商业产品部</view>    
     <view> 移动应用平台部</view>
-    <view >移动商业产品部</view>
+
     <view >开放平台部</view>
     <view >内容平台部</view>
     <view >兴趣阅读产品部</view>
+    <view> 短视频产品部</view>
     <view class="mt20"><text class="fwbold">竞猜方式</text>：进入小程序进行竞猜</view>
     <view class="mt20 fwbold">一.个人争霸赛</view>
     <view class="mt10 row">

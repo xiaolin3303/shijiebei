@@ -43,7 +43,7 @@ Page({
       'get',
       (res) => {
         finishCb && finishCb()
-        if (res.data.ret == -102) {
+        if (res.ret == -102) {
           wx.showToast({
             title: '您没有权限，请联系管理员开通',  //标题
             width: 200,
@@ -71,7 +71,7 @@ Page({
                 answerid: group.player_answer_id,
                 forecastScore: group.ban_play === 1
                                ? (group.player_answer_id === group.win_team ? Math.floor(100 * group.answerlist.filter(answer => answer.answer_id === group.player_answer_id)[0].odd) : 0)
-                               : (Math.floor(100 * group.answerlist.filter(answer => answer.answer_id === group.player_answer_id)[0].odd) || 0),
+                               : (Math.floor(100 * group.answerlist.filter(answer => answer.answer_id === group.player_answer_id).odd) || 0),
                 closed: group.ban_play === 1
               }
             });
