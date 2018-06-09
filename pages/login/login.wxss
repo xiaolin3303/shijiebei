@@ -1,1 +1,47 @@
 /* pages/login/login.wxss */
+
+.container {
+	height: 100%;
+	overflow: hidden;
+	background: #005012;
+}
+
+.banner {
+	width: 100%;
+	height: 1286rpx;
+	position: relative;
+	top: -100rpx;
+}
+
+.entry-container {
+	position:absolute;
+	width:100%;
+	top:778rpx;
+	text-align:center;
+	height:500rpx;	
+}
+
+.football{
+	width:60rpx;
+	height:60rpx;
+	position:relative;
+	left:-99rpx;
+	top:-84rpx;
+	z-index:1;
+}
+
+.login-btn, .wx-login {
+	width:346rpx;
+	height:101rpx;
+	display:block;
+	position:relative;
+	left:210rpx;	
+}
+
+.wx-login {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0;
+}

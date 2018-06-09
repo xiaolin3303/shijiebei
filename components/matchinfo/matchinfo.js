@@ -12,6 +12,10 @@ Component({
       type: Number,
       value: -100
     },
+    disabled: {
+      type: Boolean,
+      value: false
+    },    
     forecastScore: {
       type: Number,
       value: 0
@@ -30,7 +34,10 @@ Component({
    */
   methods: {
     _selectAnswer: function (e) {
-      const { answer_id } = e.currentTarget.dataset;
+      const { answer_id, disabled } = e.currentTarget.dataset;
+      if (disabled === 'true') {
+        return
+      }
       this.triggerEvent("selectAnswer", { answer_id })
     }
   }
