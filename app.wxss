@@ -1,0 +1,139 @@
+/**app.wxss**/
+page {
+	height: 100%;
+}
+
+/* .container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} */
+
+.container {
+	width: 100%;
+}
+
+.icon {
+	display: inline-block;
+	vertical-align: middle;
+}
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.row > .col {
+	flex: 1;
+}
+
+.row > .col-auto {
+	flex: 0 1 auto;
+}
+
+.row.middle {
+	align-items: center;
+}
+
+.tar {
+	text-align: right;
+}
+
+.tac {
+	text-align: center;
+}
+
+.fcwhite {
+	color: white;
+}
+
+.mt10 {
+	margin-top: 10rpx;
+}
+.mt20 {
+	margin-top: 20rpx;
+}
+.mt30 {
+	margin-top: 30rpx;
+}
+
+.mt40 {
+	margin-top: 40rpx;
+}
+
+.mb10 {
+	margin-bottom: 10rpx;
+}
+.mb20 {
+	margin-bottom: 20rpx;
+}
+
+.ft14 {
+	font-size: 14px;
+}
+
+.ft20 {
+	font-size: 20rpx;
+}
+
+.vam {
+	vertical-align: middle;
+}
+
+.ft17 {
+	font-size: 17px;
+}
+.ft19 {
+	font-size: 19px;
+}
+
+.ft11 {
+	font-size: 11rpx;
+}
+
+.ft15 {
+	font-size: 15px;
+}
+
+.fcstress {
+	color: #f7c83b;
+}
+
+.fwbold {
+	font-weight: bold;
+}
+
+.mr10 {
+	margin-right: 10px;
+}
+.mr20 {
+	margin-right: 20rpx;
+}
+.mr30 {
+	margin-right: 30rpx;
+}
+.none {
+	display : none;
+}
+
+.text-overflow {
+	text-overflow:ellipsis;
+	overflow: hidden;
+}
+.fixed {
+	position : fixed ;
+	bottom : 0px;
+	width:100%;
+
+}
+.tip{
+	color:#fff;
+	font-size:11px;
+	text-align:center;
+	margin-top:10px;
+}
+.tgreen{
+	color: #1f663b;
+}

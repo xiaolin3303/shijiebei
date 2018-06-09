@@ -1,0 +1,6 @@
+{
+	"usingComponents": {
+		"teaminfo": "/components/teaminfo/teaminfo",
+		"matchinfo": "/components/matchinfo/matchinfo"
+	}
+}

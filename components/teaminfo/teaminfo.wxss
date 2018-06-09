@@ -1,0 +1,135 @@
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.row > .col {
+	flex: 1;
+}
+
+.row > .col-auto {
+	flex: 0 1 auto;
+}
+
+.row.middle {
+	align-items: center;
+}
+
+.tar {
+	text-align: right;
+}
+
+.tac {
+	text-align: center;
+}
+
+.fcwhite {
+	color: white;
+}
+
+.mt10 {
+	margin-top: 10rpx;
+}
+.mt20 {
+	margin-top: 20rpx;
+}
+
+
+.mt40 {
+	margin-top: 40rpx;
+}
+
+.ft25 {
+	font-size: 25rpx;
+}
+
+.vam {
+	vertical-align: middle;
+}
+
+.ft12 {
+	font-size: 12px;
+}
+
+.mr10 {
+	margin-right: 10px;
+}
+.mr30 {
+	margin-right: 30rpx;
+}
+.none {
+	display : none;
+}
+
+/* components/teaminfo/teaminfo.wxss */
+.group-info{
+	background:  #fff;
+	padding: 30rpx 0;
+
+}
+.user-info-wrapper{
+	display : flex ;
+	margin-top : 25px;
+	height: 100%;
+	padding: 0 60rpx;
+}
+.group-name{
+	color: #000;
+	font-weight: bold;
+}
+
+.tab .item {
+	background: #2b8b46;
+	color: #000;
+	height: 110rpx;
+	border-right: 1rpx solid #ececec;
+}
+
+.score {
+	background: #edeef2;
+	color: #000;
+	padding: 10rpx 0;
+	font-size: 30rpx;
+}
+
+.userinfo{	
+  position: relative;
+	width:25%;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	text-align:center;
+	color: #000;
+}
+.userinfo text{
+	font-size : 10px;
+}
+.userinfo-avatar{
+	width : 100rpx;
+	height : 100rpx;
+	border: 4rpx solid #ececec;
+	border-radius: 100%;
+	margin: 0 auto;
+}
+.total-score{
+	margin-top : 15px;
+	font-size : 12px;
+	background : #ccc;
+}
+.component-teaminfo{
+	box-shadow:-1px -1px 1px rgba(0,0,0,.1);
+}
+
+
+.userinfo .captain {
+  font-size:20rpx;
+  background-color:#f3042b;
+  color:white;
+  padding:2rpx 15rpx;
+  border-radius:20rpx;
+  border:2rpx solid white;
+  left:50%;
+  margin-left:-60rpx;
+  top:-5rpx;
+  position:absolute;
+}

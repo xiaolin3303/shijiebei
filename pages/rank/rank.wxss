@@ -1,0 +1,72 @@
+.tab-item{
+  padding : 30rpx;
+  border-bottom : 1px solid #ececec;
+}
+.tab-item view {
+  width:28%;
+  display :inline-block;
+  padding-left : 10px;
+}
+
+.tab-item view:nth-child(3) {
+  text-align:right;
+
+}
+.swiper-tab{
+    width: 100%;
+    border-bottom: 2rpx solid #ccc;
+    text-align: center;
+    height: 92rpx;
+    line-height: 88rpx;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    background :#217b41;
+}
+.swiper-tab-item{
+    width: 50%; 
+    color:#fff;
+}
+.active{
+    color:#217b41;
+    background : #fff;
+}
+
+.content{
+  background: #fff;
+  background: #1f663b;
+  border-radius: 10rpx;
+}
+.content .list {
+    margin:0rpx 20px 50rpx;
+    background : #fff;
+}
+.icon{
+  height : 50rpx;
+  width : 40rpx;
+}
+.battle-item{
+  background : #efeef3;
+  
+  padding :15rpx 30rpx;
+  border-radius: 40rpx;
+  text-align: center;
+  font-size:35rpx;
+  margin-top:35rpx;
+
+}
+.battle-list{
+  display: flex;
+  flex-wrap: wrap;
+
+  background : #fff;
+  margin-bottom : 40rpx;
+  padding : 0rpx 35rpx 35rpx 35rpx;
+}
+.battle-box{
+  width : 30%;
+  padding : 0rpx 10rpx;
+}
+.selected {
+  background: #f7c83a;
+}

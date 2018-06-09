@@ -1,0 +1,43 @@
+<!--personal.wxml-->
+<view class="arenalist-wrapper ft25">
+  <view class="arena-list">
+
+  <view class="arena-box"   wx:for="{{battleList}}" wx:for-index="index" wx:for-item="battle" wx:key="battle"> 
+    <view class="arena-item {{battle.status == 1? 'active' : ''}}"  disabled="{{battle.status == 2}}" data-status="{{battle.status}}" bindtap="gotoTopic">
+      <view class="box">
+          <view class="tac">{{battle.status == 1 ? '已开启' : (battle.status == 0 ? "已结束" : "未开始")}}
+          </view>
+        <block wx:if="{{battle.status != 1}}">
+          <view class="tac fwbold mt10 ft40">{{battle.battle_desc}}</view>
+        </block>
+        <block wx:else>
+          <image  class="battle-name" src="{{battle.picture}}"></image>
+        </block>
+        <view class="row {{battle.status == 0 ?  '' : 'none'}}">
+          <view class="col">
+              <view class="tac">队伍积分</view>
+              <view class="tac">{{group.group_score}}</view>
+          </view>
+          <view class="col">
+              <view class="tac">个人积分</view>
+              <view class="tac">20</view>
+          </view>
+        </view>
+      </view>
+      <view class="row bottom {{battle.status == 1? 'bottom-active' :(battle.status == 2 ? 'grey-bottom' : '') }}" bindtap="gotoRnak">
+          <view class="col">第五名</view>
+          <view class="col tar">查看排名</view>
+        </view>
+    </view>
+  </view>
+  </view>
+  <view class="tip">每个刺激战场相对独立，战队队员复活重新开赛</view>
+</view>
+
+<view class="mt40 ">
+  <teaminfo
+    teamInfo="{{teamInfo}}"
+  >
+  </teaminfo>
+</view>
+

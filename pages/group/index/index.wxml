@@ -1,0 +1,83 @@
+<!--personal.wxml-->
+<view class="group-index-wrapper ft30">
+  <image src="/assets/head.jpg" class="banner"></image>
+  <view class="instruction fwhite">玩法介绍及奖品 ></view>
+  <view class="create-name-wrapper">
+  <block wx:if="{{!groupName}}">
+    <view class="tac mt20 ft40 fwbold">
+      邀请好友组队
+    </view>
+    <view class="row middle mt40">
+      <view class="col">
+        <input class="name-input mr20" placeholder-class="name-inputp-tip" placeholder="为队伍起名(不超过5字符)" bindinput="createGroupName" />
+      </view>
+      <view class="col-auto ft35" style="color:#339a58;" bindtap="confirmGroupName">确定</view> 
+    </view>
+    <view class="groupeer-list">
+      <view class="userinfo">
+        <view class="captain">队长</view>
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+        <view><text class="userinfo-nickname">{{username}}</text></view>
+      </view>
+      <view class="userinfo">
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="/assets/default-avatar.png" mode="cover"></image>
+        <view><text class="userinfo-nickname">?</text></view>
+      </view>
+      <view class="userinfo">
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="/assets/default-avatar.png" mode="cover"></image>
+        <view><text class="userinfo-nickname">?</text></view>
+      </view>
+      <view class="userinfo">
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="/assets/default-avatar.png" mode="cover"></image>
+        <view><text class="userinfo-nickname">?</text></view>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="mt20">
+    <block wx:if="{{!isGroupLeader}}">
+        <view class="tac ft40 mt20">{{groupLeader}}邀请你加入TA的</view>
+    </block>
+    <view class="tac   ft40 fwbold">
+        {{groupName}}战队
+    </view>
+    <view class="groupeer-list" >
+      <view class="userinfo"  wx:for="{{teamList}}" wx:for-index="index" wx:for-item="number" wx:key="number">
+        <view class="captain {{teamBase.groupLeader == number.userId ? '' : 'none'}}">队长</view>
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{number.avatar || '/assets/default-avatar.png'}}" mode="cover"></image>
+        <view><text class="userinfo-nickname">{{number.userId}}</text></view>
+      </view>
+    </view>
+    </view>
+
+  </block>
+  <view class="btn-wrapper">
+    <view
+      class="invite-btn {{buttonCnt === 'invite'  || isGroupLeader && buttonCnt !== 'goanena'  ? '':'none'}}"
+      bindtap = "inviteFriends">
+        邀请好友
+    </view>
+    <view
+      class="invite-btn {{buttonCnt === 'join' && !isGroupLeader? '':'none'}}"
+      bindtap = "confirmJoinGroup">
+        确认加入
+    </view>
+        <view
+      class="invite-btn {{buttonCnt === 'goanena' ? '':'none'}}"
+      bindtap = "gotoAnera">
+        加入战场
+    </view>
+  </view>
+  <view class=" ft30 tac mt20">自由组队时间将于6月14日18点整结束</view>
+  <view class=" ft30 tac mb20">未组队成功人员系统将智能匹配</view>
+  </view>
+
+  <view class="ft30 tac bottom-tip">6月14日前完成组队，6月15日开始进入战场</view>
+</view>
+
+<view class="tip-cover {{hasCover ? '' : 'none'}}"  bindtap="hideCover">
+  <view class="tip-content">
+    <image src="/assets/share.png" class="share"></image>
+  </view> 
+</view>
+

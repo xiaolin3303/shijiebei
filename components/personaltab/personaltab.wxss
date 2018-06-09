@@ -1,0 +1,39 @@
+/* components/personaltab/personaltab.wxss */
+.sub-tab-item{
+	width : 12.5%;
+	display:inline-block;
+}
+
+.swiper-tab-item{
+    width: 33%; 
+    color:#fff;
+    border-right: 1rpx solid #1c6c37;
+}
+.tab-item text {
+
+	width : 80px;
+	display :inline-block;
+	padding-left : 10px;
+	text-align : center;
+}
+.swiper-tab{
+    width: 100%;
+
+    text-align: center;
+    height: 92rpx;
+    line-height: 88rpx;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    background :#217b41;
+    position:fixed ;
+    top : 0px;
+    z-index : 1;
+    font-size :17px;
+    box-shadow:-1px -1px 1px rgba(0,0,0,.1);
+    margin-top : 1px;
+}
+.active{
+    color:#217b41;
+    background : #fff;
+}

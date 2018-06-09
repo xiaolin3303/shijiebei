@@ -1,0 +1,46 @@
+<!--personal.wxml-->
+<view class="topic-wrapper">
+  <view class="tab row middle">
+    <view class="col tac item {{tab.id === currentTab ? 'active' : ''}}" wx:for="{{tabList}}" wx:for-item="tab" wx:key="tab.id" data-tabid="{{tab.id}}" bindtap="selectTab">
+      <image wx:if="{{tab.id === currentTab}}" src="/assets/icons/arrow-active.png" class="arrow"></image>
+      <image wx:else src="/assets/icons/arrow.png" class="arrow"></image>              
+      <view class="mt20 ft30 ml35">{{tab.caption}}</view>
+      <view class="ft20 ml35">{{tab.status}}</view>
+    </view>
+  </view>
+  <view class="tip">以下为淘汰题，答对继续积分，答错则无法继续闯关</view>
+  <view class="matchinfo-wrapper mt40">
+    <matchinfo
+      group="{{matchInfo}}"
+      answerId="{{matchInfo.selectAnswerId}}"
+      forecastScore="{{10}}"
+      bind:selectAnswer="selectMatchAnswer"
+    >
+    </matchinfo>
+  </view>
+
+  <view class="tip">以下为积分题，答对累计积分，答错则无法继续闯关</view>
+  <view class="topic-list">
+    <view class="topic-item ft30 mt30" wx:for="{{pList}}" wx:for-index="index" wx:for-item="list" wx:key="list">
+      <view class="wrapper">
+        <view class="topic ft35">{{index+1}}.{{list.itemDescribe}}</view>
+        <view class="answer-list row mt20">
+          <view class="option col" wx:for="{{list.answerSummary}}" wx:for-index="i" wx:for-item="answer" wx:key="answer" bindtap="selectPList" data-answer_id="{{answer.answer_id}}" data-item_id="{{list.itemId}}">
+            <view class="answer-item {{ (answer.answer_id === list.selectAnswerId )  ? 'selected' : ''}}">{{answer.value}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="mt30 tip">预计得分:10</view>
+    </view>
+  </view>
+  <view class="tac mt40">
+    <view class="submit-btn" bindtap="submitAnswer">提交答案</view>
+  </view>
+  <view class="mt40 fixed">
+    <teaminfo
+      teamInfo="{{teamInfo}}"
+    >
+    </teaminfo>
+  </view>
+</view>
+

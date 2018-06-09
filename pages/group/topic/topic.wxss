@@ -1,0 +1,156 @@
+.topic-wrapper{
+	background : #21653c;
+	padding-bottom:500rpx;
+}
+.topic-wrapper .tip{
+	color:#fff;
+	font-size:11px;
+	text-align:center;
+	margin-top:10px;
+}
+.topic-list {
+	padding: 20rpx 30rpx;
+}
+
+.topic-list .tip {
+	height: 50rpx;
+	line-height: 50rpx;
+	background: #edeef2;
+	text-align: right;
+	box-sizing: border-box;
+	padding-right: 20rpx;
+	color: #32bb63;
+	border-bottom-left-radius: 10rpx;
+	border-bottom-right-radius: 10rpx;
+}
+
+
+.arenalist-wrapper{
+	margin-top : 20px;
+}
+
+
+.topic-list .topic-item {
+	background: white;
+	padding-top: 30rpx;
+	border-radius: 10rpx;
+}
+
+.topic-item .wrapper {
+	padding: 0 50rpx;
+}
+
+.matchinfo-wrapper {
+	margin: 30rpx;
+}
+
+.submit-btn {
+	width: 450rpx;
+	height: 100rpx;
+	color: white;
+	text-align: center;
+	border-radius: 50rpx;
+	line-height: 100rpx;
+	background: #2b8b46;
+	display: inline-block;
+}
+
+.answer-list .option{
+	box-sizing: border-box;
+	padding: 20rpx;
+}
+
+.answer-list .option .answer-item {
+	width: 100%;
+	height: 90rpx;
+	line-height: 90rpx;
+	text-align: center;
+	font-size: 30rpx;
+	background: #edeef2;
+	border-radius: 50rpx;
+}
+
+.answer-list .option .answer-item.selected {
+	background: #f7c83a;
+}
+
+.group-info{
+	background:  #0c389b;
+	padding: 30rpx 0;
+
+}
+.user-info-wrapper{
+	display : flex ;
+	margin-top : 25px;
+	height: 100%;
+	padding: 0 60rpx;
+}
+.group-name{
+	color: white;
+	font-weight: bold;
+}
+
+.tab .item {
+	background: #39995b;
+	color: white;
+	height: 110rpx;
+	position: relative;
+}
+
+.tab .item.active {
+	background: white;
+	color: #333;
+}
+
+.ml35 {
+	margin-left: 35rpx;
+}
+
+.tab .item .arrow {
+	position: absolute;
+	right: -32rpx;
+	top: 0;
+	width: 35rpx;
+	height: 110rpx;
+	z-index: 100;
+}
+
+.score {
+	background: #d50005;
+	color: white;
+	padding: 10rpx 0;
+}
+
+.userinfo{	
+
+	width:25%;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	text-align:center;
+	color: white;
+}
+.userinfo text{
+	font-size : 10px;
+}
+.userinfo-avatar{
+	width : 100rpx;
+	height : 100rpx;
+	border: 4rpx solid white;
+	borer-radius: 100%;
+	border-radius : 15px;
+	margin: 0 auto;
+}
+.total-score{
+	margin-top : 15px;
+	font-size : 12px;
+	background : #ccc;
+}
+.answer-item.res-wrong {
+	background :#ed3829;
+    color: #fff;
+}
+.answer-item.res-correct {
+	background :#33bb62;
+  color: #fff;
+}

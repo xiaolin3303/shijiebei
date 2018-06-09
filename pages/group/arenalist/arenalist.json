@@ -1,0 +1,5 @@
+{
+	"usingComponents": {
+		"teaminfo": "/components/teaminfo/teaminfo"
+	}
+}

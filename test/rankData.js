@@ -1,0 +1,1 @@
+module.exports = {"data":[{"score":900,"user_id":"arfuewu"},{"score":600,"user_id":"starjunliu"},{"score":520,"user_id":"nicklou"},{"score":190,"user_id":"ottozhou"},{"score":150,"user_id":"lissun"},{"score":50,"user_id":"carlsonlin"},{"score":20,"user_id":"meihangwang"},{"score":20,"user_id":"viinyxu"},{"score":2,"user_id":"wesperhuang"}],"msg":"Success","ret":0}

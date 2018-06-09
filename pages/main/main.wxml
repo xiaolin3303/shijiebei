@@ -1,0 +1,27 @@
+<!--logs.wxml-->
+<view class="container">
+
+	<image class="banner" src="/assets/index-banner.jpg" mode="scaleToFill"></image>
+
+	<view class="entry-container">
+	<view class="img-wrapper frist">
+		<image class="football {{jumpIndex === 0 ? 'jump' : ''}}" src="/assets/football.png"></image>
+    	<image class="entry-btn" src="/assets/personal.png" bindtap="bindViewPersonal"></image>
+	</view>
+
+	<view class="img-wrapper mt50">
+		<image class="football {{jumpIndex === 1 ? 'jump' : ''}}" src="/assets/football.png"></image>
+    	<image class="entry-btn" src="/assets/group.png" bindtap="bindViewGroup"></image>
+	</view>
+
+	<view class="img-wrapper mt50">
+		<image class="football {{jumpIndex === 2 ? 'jump' : ''}}" src="/assets/football.png"></image>
+    	<image class="entry-btn" src="/assets/rank.png" bindtap="bindViewRank"></image>
+	</view>
+
+	<view class="bottom-btn" bindtap="bindViewInstruction"></view>
+	
+	</view>
+
+</view>
+

@@ -1,0 +1,155 @@
+.group-index-wrapper {
+	background: #0f461e;
+	width: 100%;
+	height: 100%;
+}
+
+.banner {
+	width: 100%;
+	height: 1056rpx;
+	position:relative;
+	top:-73px;
+
+}	
+
+.create-name-wrapper {
+	position:absolute;
+	width:690rpx;
+	left:28rpx;
+	top:477rpx;
+	border-radius:10rpx;
+	background:white;
+	box-sizing:border-box;
+	padding:10rpx 25rpx;
+
+}
+
+.name-input {
+	background: #e7e7e8;
+	border-radius: 10rpx;
+	font-size: 30rpx;
+	height: 80rpx;
+	box-sizing: border-box;
+	padding: 0 30rpx;
+}
+
+.name-inputp-tip {
+	color: #666;
+}
+
+.tab-item{
+	padding : 15px;
+	border-bottom : 1px solid #ececec;
+}
+.tab-item text {
+	width : 80px;
+	display :inline-block;
+	padding-left : 10px;
+	text-align : center;
+}
+.title{
+	font-size : 24px;
+	text-align:center;
+	margin-top : 20px;
+}
+.create-group-name{
+	margin-top : 100px;
+	width:75%;
+	display : flex;
+}
+.create-group-name input {
+	font-size:10px;
+	width : 90%;
+	padding : 5px;
+	border : 1px #ececec solid ;
+}
+.create-group-name button {
+	width : 50px ;
+	height : 20px;
+	font-size : 10px;
+	background : red;
+	color : #fff;
+}
+.groupeer-list{
+	display : flex ;
+	width : 100%;
+	margin-top : 40rpx;
+	box-sizing: border-box;
+	padding: 0 40rpx;
+	justify-content:center;
+}
+.userinfo{	
+	width:25%;
+	text-align:center;
+	position: relative;
+}
+
+.userinfo .captain {
+	font-size: 20rpx;
+	background-color: #f3042b;
+	color: white;
+	padding: 2rpx 15rpx;
+	border-radius: 20rpx;
+	border: 2rpx solid white;
+	left: 50%;
+	margin-left: -60rpx;
+	top: -5rpx;
+	position: absolute;
+}
+
+.userinfo-avatar{
+	width : 105rpx;
+	height : 105rpx;
+	border-radius : 100%;
+}
+.btn-wrapper{
+	margin-top : 21rpx;
+	text-align: center;
+}
+.btn-wrapper .invite-btn {
+	width: 350rpx;
+	height: 85rpx;
+	text-align: center;
+	display: inline-block;
+	font-size: 35rpx;
+	border-radius: 50rpx;
+	line-height: 85rpx;
+	background: #339a58;
+	color: white;
+}
+.tip-cover{
+	height:100%;
+	background:rgba(0,0,0,.6);
+	color:#fff;
+	width:100%;
+	position:absolute;
+	top:0px;
+	
+}
+.invite-btn.none{
+	display : none ;
+}
+
+.share {
+	width:549rpx;
+	height:514rpx;
+	position:absolute;
+	right:173rpx;
+	top:38rpx;
+}
+.tip-content {
+	display:flex;
+	justify-content:center
+}
+.bottom-tip{
+	font-size : 10px ;
+	color : #87cca0;
+	margin-top : 50rpx;
+}
+.instruction{
+	position:absolute;
+	top:39rpx;
+	color:#fff;
+	right:23rpx;
+
+}

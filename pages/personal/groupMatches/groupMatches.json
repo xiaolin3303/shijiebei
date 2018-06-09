@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "navtab": "/components/personaltab/personaltab",
+    "matchInfo": "/components/matchinfo/matchinfo"
+  }
+}

@@ -1,0 +1,112 @@
+/* components/matchinfo/matchinfo.wxss */
+.match {
+	border-radius: 20rpx;
+	background: #e8eaee;
+	padding-top: 10px;
+}
+
+.match .box {
+	display: flex;
+	flex-direction: row;
+	font-size:14px;
+	text-align:center;
+
+}
+
+.select-btn.res-active {
+	background :#f7c83b;
+}
+
+.match .box .item {
+	flex: 1;
+	justify-content: center;
+	display:flex;
+}
+
+.match .box .item .country {
+	height: 31px;
+	font-size: 14px;
+}
+
+.icon.vs {
+	width: 26px;
+	height: 20px;
+}
+.icon.national-flag{
+	width:20px;
+	height:14px;
+	position:relative;
+	bottom:1px;
+
+}
+.icon.flag-right{
+	left : 5px;
+}
+.icon.flag-left{
+	right : 5px;
+}
+.icon.warning {
+	width: 4px;
+	height: 12px;
+}
+
+.match .tip {
+	height: 25px;
+	background: #edeef2;
+	text-align: center;
+	line-height: 25px;
+	color: #217b41;
+	font-size: 12px;
+}
+.country{
+	font-size : 20px;
+}
+.select-btn{
+	background:#cbcbcb;
+	border-radius:26px;
+	width:70%;
+	font-size:12px;
+	margin-bottom:15px;
+	padding:4px 0px;
+
+}
+.item-group {
+	position:relative;
+	top:-10px;
+	left:5px;
+	height:32px;
+	background: #339a58;
+	width:16px;
+	font-size:25rpx;
+	color:#fff;
+}
+.item-bottom{
+	background : #cbcbcb;
+	position:relative;
+	bottom : 0px;
+	padding : 5px 0px ;
+	font-size: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	display : flex ;
+	width : 100%;
+}
+.tip-msg {
+	color: #ed3829;
+	padding-left : 10px;
+}
+.forecast-score{
+	
+	color: #1f663b;
+	position:absolute;
+	right:12px;
+
+}
+.subscript{
+	height:12px;
+	width:16px;
+	position:relative;
+	left:-21rpx;
+	bottom:-38rpx;
+
+}

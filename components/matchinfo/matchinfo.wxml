@@ -1,0 +1,34 @@
+<!--components/matchinfo/matchinfo.wxml-->
+<view class="match component-matchinfo">
+	<view class="box">
+	  <view class="item-group"> {{group.group_id}}</view>
+	  <image class="subscript" src="/assets/icons/jiaobiao.png"></image>
+	  <view class="item">
+	    <view class="country">{{group.team_name1}}</view>
+	  </view>
+	  <view class="item">
+	    <view class="country">
+	      <image src="/assets/icons/vs-icon.png" class="icon vs"></image>
+	    </view>
+	  </view>
+	  <view class="item">
+	    <view class="country">{{group.team_name2}}</view>
+	  </view>
+	</view>
+	<view class="box" >
+	  <view class="item" wx:for="{{group.answerlist}}" wx:for-index="i" wx:for-item="answer" wx:key="answer">
+	    <view class="frist-victory select-btn {{answerId === answer.answer_id ? 'res-active' : ''}}" bindtap="_selectAnswer" data-answer_id="{{answer.answer_id}}">
+	      <view>{{answer.answe_describe}}</view>
+	      <view>{{answer.odd}}</view>
+	    </view>
+	  </view>
+	</view>
+	<view class="item-bottom">
+	  <view class="tip-msg">
+	    竞猜截止时间：6月12日 23:52
+	  </view>
+	  <view class="forecast-score">预计得分:{{forecastScore || '-'}}</view>
+	</view>
+</view>
+
+

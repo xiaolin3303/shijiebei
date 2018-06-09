@@ -1,0 +1,138 @@
+<!--personal.wxml-->
+<view class="personal-wrapper">
+  <navtab
+    currentTab="{{currentTab}}"
+    bind:switchTab="switchTab"
+  >
+  </navtab>
+
+  <view class = " mt40 {{currentTab == 0 ? '' : 'none' }}" style="margin-top:46px;">
+    <view class="tac ft35 fcwhite" style="padding-top :15px;font-size:15px;">比赛结束</view>
+    <view class="group-match-list" style="padding-bottom: 0">
+      <view class="match"  wx:for="{{groupListData}}" wx:for-index="index" wx:for-item="group" wx:key="group" wx:if="{{group.ban_play === 1}}">
+        <view class="box">
+          <view class="item-group">
+            <view>{{group.group_id}}</view>
+            <view>组</view>
+
+          </view>
+          <image class="subscript" src="/assets/icons/jiaobiao.png"></image>
+          <view class="item" style="justify-content: flex-start; padding-left: 20rpx">
+            <view class="country">
+              <text>{{group.team_name1}}</text>
+              <image src="{{group.team_url1}}" class="icon national-flag flag-right"></image>
+            </view>
+          </view>
+          <view class="item vs">
+            <view class="country">
+              <image src="/assets/icons/vs-icon.png" class="icon vs"></image>
+            </view>
+          </view>
+            <view class="item" style="justify-content: flex-end; padding-right: 20rpx">
+              <view class="country">
+              <image src="{{group.team_url2}}" class="icon national-flag flag-left"></image>
+              <text>{{group.team_name2}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="box" >
+          <view class="item" wx:for="{{group.answerlist}}" wx:for-index="i" wx:for-item="answer" wx:key="answer">
+            <view 
+              class="frist-victory select-btn {{quizRes[group.item_id].answerid === answer.answer_id ? 'res-active' :  ''}} {{ group.win_team !==0 && group.win_team === answer.answer_id?'res-correct':'' }} {{ group.player_answer_id === answer.answer_id ? 'res-active':'' }} {{ group.win_team !==0 && group.win_team !== group.player_answer_id && group.player_answer_id === answer.answer_id ? 'res-wrong' : '' }}"
+              data-odd    = "{{answer.odd}}"
+              data-itemid  = "{{group.item_id}}"
+              data-answerid   = "{{answer.answer_id}}"
+              data-lockanswer = "{{group.ban_play === 1}}"
+              bindtap      = "handleQuizResult">
+              <view>{{answer.answe_describe}}</view>
+              <view>{{answer.odd}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="item-bottom">
+          <view class=" tip-msg" style="color: #1f663b;">
+            获胜国家：{{group.team_name1}}
+          </view>
+          <view class="forecast-score">实际得分:{{quizRes[group.item_id].forecastScore || '0'}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="tac fcwhite ft15">竞猜中</view>
+    <view class="group-match-list">
+      <view class="match"  wx:for="{{groupListData}}" wx:for-index="index" wx:for-item="group" wx:key="group" wx:if="{{group.ban_play !== 1}}">
+        <view class="box">
+          <view class="item-group">
+            <view>{{group.group_id}}</view>
+            <view>组</view>
+          </view>
+          <image class="subscript" src="/assets/icons/jiaobiao.png"></image>
+          <view class="item" style="justify-content: flex-start; padding-left: 20rpx">
+            <view class="country">
+              <text>{{group.team_name1}}</text>
+              <image src="{{group.team_url1}}" class="icon national-flag flag-right"></image>
+            </view>
+          </view>
+          <view class="item vs">
+            <view class="country">
+              <image src="/assets/icons/vs-icon.png" class="icon vs"></image>
+            </view>
+          </view>
+            <view class="item" style="justify-content: flex-end; padding-right: 20rpx">
+              <view class="country">
+              <image src="{{group.team_url2}}" class="icon national-flag flag-left"></image>
+              <text>{{group.team_name2}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="box" >
+          <view class="item" wx:for="{{group.answerlist}}" wx:for-index="i" wx:for-item="answer" wx:key="answer">
+            <view 
+              class="frist-victory select-btn {{quizRes[group.item_id].answerid === answer.answer_id ? 'res-active' :  ''}} {{ group.win_team !==0 && group.win_team === answer.answer_id?'res-correct':'' }} {{ group.player_answer_id === answer.answer_id ? 'res-active':'' }} {{ group.win_team !==0 && group.win_team !== group.player_answer_id && group.player_answer_id === answer.answer_id ? 'res-wrong' : '' }}"
+              data-odd    = "{{answer.odd}}"
+              data-itemid  = "{{group.item_id}}"
+              data-answerid   = "{{answer.answer_id}}"
+              data-lockanswer = "{{group.ban_play === 1}}"
+              bindtap      = "handleQuizResult">
+              <view>{{answer.answe_describe}}</view>
+              <view>{{answer.odd}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="item-bottom">
+          <view class="tip-msg">
+            <image src="/assets/icons/warning-icon.png" class="icon warning"></image>
+            竞猜截止时间：{{group.ban_time}}
+          </view>
+          <view class="forecast-score">预计得分:{{quizRes[group.item_id].forecastScore || '0'}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="bottom-confrim-btn row">
+      <view class="col">
+        <view class="row middle oper-list">
+          <view class="col">
+            <view class="icon-wrapper" bindtap="clearSelect">
+              <image src="/assets/icons/delete-icon.png" class="icon delete"></image>
+              <view >全部清除</view>
+            </view>
+            <view class="icon-wrapper" bindtap="intelligentSelect">
+              <image src="/assets/icons/select-all-icon.png" class="icon select-all"></image>
+              <view>智能全选</view>
+            </view>
+          </view>
+          <view class="col-auto tar  mr10 ft14">
+            预计积分:{{ totalScore || '-' }}
+          </view>
+        </view>
+      </view>
+      <view class="col-auto btn-wrapper">
+        <button bindtap="submitGroupRes ft17">确认</button>
+      </view>
+    </view>
+  </view>
+  <view style="height:120rpx"></view>
+</view>
+
+

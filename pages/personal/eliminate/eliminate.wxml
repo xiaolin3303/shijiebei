@@ -1,0 +1,16 @@
+<!--personal.wxml-->
+<view class="personal-wrapper">
+  <navtab
+    currentTab="{{currentTab}}"
+    bind:switchTab="switchTab"
+  >
+  </navtab>
+  
+  <view class = " img-wrapper {{currentTab == 2 ? '' : 'none' }}" style="margin-top:46px;">
+      
+      <image src="/assets/non-open.png" class="non-open"></image>
+      <view class="tip" style ="font-size : 15px;">7.1日开启，敬请期待！</view>
+  </view>
+</view>
+
+

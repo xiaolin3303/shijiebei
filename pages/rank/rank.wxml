@@ -1,0 +1,72 @@
+<!--personal.wxml-->
+
+<view class="swiper-tab">
+      <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">个人排行榜</view>
+      <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">刺激赛场排行榜</view>
+</view>
+<view class="rank-wrapper">
+
+  <view class="content">
+
+    <block wx:if="{{currentTab == 0}}">
+        <view class="list">
+        <view class="tab-item" >
+          <view >排名</view> 
+          <view>姓名</view> 
+          <view>积分</view> 
+        </view>
+        <view class="tab-item" wx:for="{{playerList}}" wx:for-index="index" wx:for-item="player" wx:key="player">
+          
+          <view wx:if="{{index==0}}">
+            <image  class="icon" src="/assets/icons/1.png"></image>
+          </view>
+          <view wx:elif="{{index==1}}">
+            <image  class="icon" src="/assets/icons/2.png"></image>
+          </view>
+          <view wx:elif="{{index==2}}">
+            <image  class="icon" src="/assets/icons/3.png"></image>
+          </view>
+          <view wx:else>{{index}}</view> 
+          <view>{{player.user_id}}</view> 
+          <view>{{player.score}}</view>
+        </view>
+
+      </view>
+    </block>
+
+    <block wx:elif="{{currentTab == 1}}">
+
+      <view class="battle-list">
+          <view class="battle-box "  wx:for="{{battleList}}" wx:for-index="index" wx:for-item="battle" wx:key="battle">
+            <view class="battle-item" data-battleid="{{battle.battle_id}}" bindtap="changeBattle">{{battle.battle_desc}}</view>
+          </view>                                                 
+        
+      </view>
+      <view class="list">
+
+        <view class="tab-item" >
+          <view >排名</view> 
+          <view>姓名</view> 
+          <view>xuxu</view> 
+        </view>
+        <view class="tab-item" wx:for="{{groupList}}" wx:for-index="index" wx:for-item="group" wx:key="group">
+          <view wx:if="{{index==0}}">
+            <image  class="icon" src="/assets/icons/1.png"></image>
+          </view>
+          <view wx:elif="{{index==1}}">
+            <image  class="icon" src="/assets/icons/2.png"></image>
+          </view>
+          <view wx:elif="{{index==2}}">
+            <image  class="icon" src="/assets/icons/3.png"></image>
+          </view>
+          <view wx:else>{{index}}</view> 
+          <view>{{group.groupName}}</view> 
+          <view>{{group.groupScore}}</view>
+        </view>
+
+      </view>
+    </block>
+
+  </view>
+
+ </view>

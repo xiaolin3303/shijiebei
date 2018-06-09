@@ -1,0 +1,16 @@
+/* pages/instruction/instruction.wxss */
+.instruction-wrapper{
+  background: #1f663b;
+  padding : 30rpx;
+}
+.content{
+  background: #fff;
+  padding:50rpx 20px;
+  border-radius: 15rpx;
+  line-height : 23px;
+}
+.content .title {
+  text-align: center;
+  color: #359959;
+  font-weight: bold;
+}

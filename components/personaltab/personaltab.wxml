@@ -1,0 +1,6 @@
+<!--components/personaltab/personaltab.wxml-->
+<view class="swiper-tab">
+	<view class="swiper-tab-item {{currentTab==0?'active':''}}" data-currenttab="0" bindtap="_clickTab">小组赛</view>
+	<view class="swiper-tab-item {{currentTab==1?'active':''}}" data-currenttab="1" bindtap="_clickTab">冠军赛</view>
+	<view class="swiper-tab-item {{currentTab==2?'active':''}}" data-currenttab="2" bindtap="_clickTab">淘汰赛</view>
+</view>

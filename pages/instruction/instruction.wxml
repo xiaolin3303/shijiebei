@@ -1,0 +1,75 @@
+<!--pages/instruction/instruction.wxml-->
+<view class="instruction-wrapper">
+  <view class="content ft15">
+    <view class="title ft17">俄罗斯世界杯 竞猜规则</view>
+    <view class="ft12">
+    <view class="mt40"><text class="fwbold">参与人员:</text></view>
+    <view> 移动应用平台部</view>
+    <view >移动商业产品部</view>
+    <view >开放平台部</view>
+    <view >内容平台部</view>
+    <view >兴趣阅读产品部</view>
+    <view class="mt20"><text class="fwbold">竞猜方式</text>：进入小程序进行竞猜</view>
+    <view class="mt20 fwbold">一.个人争霸赛</view>
+    <view class="mt10 row">
+        <view>1.</view>
+        <view >从6月11日，周一起开放竞猜小组赛和猜冠军（竞猜小程序内附详细赛程和规则）</view>
+    </view>
+    <view class="mt10 row">
+        <view>2.</view>
+        <view >至6月14日21点（北京时间）截止投票（比赛开始前2小时）：组委会将收集所有参与人的投票结果，过期不候。）</view>
+    </view>
+
+    <view class="mt10">3.个人争霸赛分为三种</view>
+    <view class="mt10 row">
+        <view>(1).</view>
+        <view >小组赛竞猜：每场猜胜平负，基准分100分，根据赔率算每场得分。例如“俄罗斯VS沙特阿拉伯”，俄罗斯胜的赔率是1.25，如果猜俄罗斯胜利结果正确，则该场比赛获得积分为100*1.25=125分。若用户不选择则为0分，猜错不扣分。个人初始分为0，小组赛个人总积分榜按照积分高低排序；</view>
+    </view>
+    <view class="mt10 row">
+        <view>(2).</view>
+        <view >淘汰赛竞猜：每场猜胜负，基准分100分，根据赔率计算每场得分。若用户不选择则为0分，猜错不扣分。小组赛的个人积分不带入到淘汰赛竞猜，个人初始分为0，淘汰赛个人总积分榜按照积分高低排序</view>
+    </view>
+    <view class="mt10 row">
+        <view>(3).</view>
+        <view >冠军竞猜：列出32个国家，每人仅可选择一个国家作为冠军队伍，6月14日21点后不能修改竞猜结果。每个用户可以看到每个国家支持人数。最后决赛完成后，所有猜中冠军的人员分享猜冠军奖金池奖金；</view>
+    </view>
+    <view class="fwbold mt20">提醒</view>
+
+    <view class="mt10 row">
+        <view>1.</view>
+        <view >智能帮选可以一键竞猜48场小组赛结果，结果仍可修改；小组赛每场比赛开场前2小时将无法对该场比赛结果进行修改。</view>
+    </view>
+    <view class="mt10 row">
+        <view>2.</view>
+        <view >组委会将在比赛结束12小时之内及时公布比赛结果及积分排名情况。逢周末节假日，顺延至下一个工作日及时更新。</view>
+    </view>
+
+    <view class="mt20 fwbold">二.刺激战场</view>
+    <view class="mt10 row">
+        <view>1.</view>
+        <view >战场选择：分为十个主题战场（小组赛6个，淘汰赛4个）。所有队伍可以参加全部10场主题战场，每个主题战场将依次开放。</view>
+    </view>
+    <view class="mt10 row">
+        <view>2.</view>
+        <view >组队模式：四排模式，一个队伍有且仅有4名队员，队长可以创建队伍名称，通过分享微信链接邀请好友加入战队，好友点击微信链接选择接受，可以成为受邀战队队员，最多邀请成功3个好友。支持自选/系统自动分配两种组队模式。如果没有受邀加入战队，可以选择系统自动分配，匹配进入相应的战队。</view>
+    </view>
+    <view class="mt10 row">
+        <view>3.</view>
+        <view >竞猜内容：每个主题战场会包含4场比赛和若干问题。竞猜内容分为淘汰题与积分题。如果第一场比赛淘汰题猜错，则该队员将不能继续后面的竞猜，不能再为战队贡献积分。淘汰题在竞猜界面上会提示，可能是才比赛结果，也可能是与比赛内容相关的问题。只有第一场比赛的淘汰题猜正确，才能继续进入下一场比赛竞猜；同时通过猜积分题累积积分拉开每个团队之间的差距，每道题分数为100分，比赛结果的积分仍为100*赔率。战队积分是每个队员积分之和，如果队员被淘汰，则不能继续竞猜增加战队的积分。</view>
+    </view>
+
+    <view class="mt10">4.计分规则</view>
+
+    <view class="mt10 row">
+        <view>(1).</view>
+        <view >初始积分是0，小组赛每场猜胜平负猜对100*赔率，累积积分；淘汰赛初始积分是0，每场淘汰赛猜胜负猜对100*赔率，累积积分。</view>
+    </view>
+    <view class="mt10 row">
+        <view>(2).</view>
+        <view >团队：每个主题战场每个战队初始分是0，每个队员积分之和为每个战队的总积分，每个主题战场选出一个得分最高的战队为优胜战队</view>
+    </view>
+
+  </view>
+  </view>
+</view>
+
