@@ -19,7 +19,11 @@ Page({
     selectData: {},
     totalScore: 0,
     myAnwser : '',
-    isCorrect : ''
+    isCorrect : '',
+    banGroupList: [],
+    lastBanGroup: {},
+    displayBanGroup: [],
+    showMoreBanGroup: false
   },
 
   onLoad:function(e) {
@@ -81,10 +85,16 @@ Page({
           const quiz = quizres[groupId];
           return acc + (quiz.forecastScore && quiz.closed !== true ? quiz.forecastScore : 0)
         }, 0)
+        const banGroupList = groupRes.filter(group => group.ban_play === 1);
+        const lastBanGroup = banGroupList.length ? banGroupList[banGroupList.length  - 1] : {}
+        const displayBanGroup = [lastBanGroup]
         this.setData({
           quizRes: quizres,
           totalScore : totalScore,
           groupListData: groupRes,
+          banGroupList,
+          lastBanGroup,
+          displayBanGroup
         })
       }
     );
@@ -112,7 +122,7 @@ Page({
       let quizres = Object.assign({}, this.data.quizRes, {
         [itemid]: {
           answerid,
-          forecastScore: 100 * odd
+          forecastScore: Math.ceil(100 * odd)
         }
       })
 
@@ -137,6 +147,19 @@ Page({
         totalScore
       })
 
+  },
+  showMoreBanGroup: function () {
+    this.setData({
+      displayBanGroup: this.data.banGroupList,
+      showMoreBanGroup: true
+    });
+  },
+  hideBanGroup: function () {
+    console.log([this.data.lastBanGroup])
+    this.setData({
+      displayBanGroup: [this.data.lastBanGroup],
+      showMoreBanGroup: false
+    });
   },
   clearSelect:function(e){
 
