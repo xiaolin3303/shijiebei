@@ -10,14 +10,28 @@
   </view>
   <view class="tip " style="font-size:30rpx">以下为淘汰题，答对继续积分，答错则无法继续闯关</view>
   <view class="matchinfo-wrapper mt40">
-    <matchinfo
-      group="{{matchInfo}}"
-      answerId="{{matchInfo.selectAnswerId}}"
-      forecastScore="{{10}}"
-      disabled="{{matchInfo.correctAnswer !== -1}}"
-      bind:selectAnswer="selectMatchAnswer"
-    >
-    </matchinfo>
+      <matchinfo
+        group="{{matchInfo}}"
+        answerId="{{matchInfo.selectAnswerId}}"
+        forecastScore="{{10}}"
+        disabled="{{matchInfo.correctAnswer !== -1}}"
+        bind:selectAnswer="selectMatchAnswer"
+      >
+      </matchinfo>
+    <view class="topic-list" style="padding :0px">
+      <view class="topic-item ft30 mt30" wx:for="{{bPlist}}" wx:for-index="index" wx:for-item="list" wx:key="list">
+        <view class="wrapper">
+          <view class="topic ft35">{{index+1}}.{{list.itemDescribe}}</view>
+          <view class="answer-list row mt20">
+            <view class="option col {{list.correctAnswer === -1 ? 'open' : ''}}" wx:for="{{list.answerSummary}}" wx:for-index="i" wx:for-item="answer" wx:key="answer" bindtap="selectPList" data-answer_id="{{answer.answer_id}}" data-item_id="{{list.itemId}}" data-disabled="{{list.correctAnswer !== -1 ? 'true' : 'false'}}">
+              <view class="answer-item {{ (answer.answer_id === list.selectAnswerId )  ? 'selected' : ''}} {{list.correctAnswer === answer.answer_id ? 'correct-answer' : ''}} {{list.selectAnswerId === answer.answer_id ? 'user-answer' : ''}}">{{answer.value}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="mt30 tip">预计得分:10</view>
+      </view>
+    </view>  
+
   </view>
 
   <view class="tip" style="font-size:30rpx">以下为积分题，答对累计积分，答错则无法继续闯关</view>
@@ -26,8 +40,8 @@
       <view class="wrapper">
         <view class="topic ft35">{{index+1}}.{{list.itemDescribe}}</view>
         <view class="answer-list row mt20">
-          <view class="option col" wx:for="{{list.answerSummary}}" wx:for-index="i" wx:for-item="answer" wx:key="answer" bindtap="selectPList" data-answer_id="{{answer.answer_id}}" data-item_id="{{list.itemId}}">
-            <view class="answer-item {{ (answer.answer_id === list.selectAnswerId )  ? 'selected' : ''}}">{{answer.value}}</view>
+          <view class="option col {{list.correctAnswer === -1 ? 'open' : ''}}" wx:for="{{list.answerSummary}}" wx:for-index="i" wx:for-item="answer" wx:key="answer" bindtap="selectPList" data-answer_id="{{answer.answer_id}}" data-item_id="{{list.itemId}}" data-disabled="{{list.correctAnswer !== -1 ? 'true' : 'false'}}">
+            <view class="answer-item {{ (answer.answer_id === list.selectAnswerId )  ? 'selected' : ''}} {{list.correctAnswer === answer.answer_id ? 'correct-answer' : ''}} {{list.selectAnswerId === answer.answer_id ? 'user-answer' : ''}}">{{answer.value}}</view>
           </view>
         </view>
       </view>

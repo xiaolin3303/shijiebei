@@ -10,6 +10,7 @@ Page({
   data: {
     matchInfo: {},
     pList : [],
+    bPlist :[],
     teamInfo : [],
     tabList: [{
       id: 1,
@@ -75,34 +76,49 @@ Page({
           })
         });
 
-
         let matchInfo = {}
+        let bPlist = [];
 
         blist.map( item => {
 
-          let answerlist = [];
-          Object.keys(item.answerSummary).map(key => {
+          if(item.isBet == 1 ){
 
-              const answer = {
-                  answe_describe : item.answerSummary[key],
-                  answer_id : +key
-              }
-              answerlist.push(answer);
+            let answerlist = [];
 
-          });
+            Object.keys(item.answerSummary).map(key => {
 
-          matchInfo = {
-              answerlist,
-              itemId: item.itemId,
-              team_name1 : item.team1,
-              team_name2 : item.team2,
-              group_id : item.scheduleGroup,
+                const answer = {
+                    answe_describe : item.answerSummary[key],
+                    answer_id : +key
+                }
+                answerlist.push(answer);
+            });
+
+            matchInfo = {
+                answerlist,
+                itemId: item.itemId,
+                team_name1 : item.team1,
+                team_name2 : item.team2,
+                group_id : item.scheduleGroup,
+                selectAnswerId: item.alreadyAnswer,
+                correctAnswer: item.correctAnswer
+            }
+          }else if (item.isBet == 0 ){
+
+            let answerSummary  = Object.keys(item.answerSummary).map(key => ({
+              answer_id: +key,
+              value: item.answerSummary[key]
+            }))
+            bPlist.push(Object.assign({}, item, {
               selectAnswerId: item.alreadyAnswer,
-              correctAnswer: item.correctAnswer
+              answerSummary
+            }))
           }
+         
         })
 
         this.setData({
+          bPlist,
           matchInfo,
           pList,
           battleInfo
@@ -131,7 +147,6 @@ Page({
         }
 
         const teamInfo = res.data;
-
         const mystatus = teamInfo[1].filter(item => {
             return item.userId == username
         })
@@ -155,7 +170,10 @@ Page({
   },
 
   selectPList: function (e) {
-    const { answer_id, item_id } = e.currentTarget.dataset;
+    const { answer_id, item_id, disabled } = e.currentTarget.dataset;
+    if (disabled === 'true') {
+      return
+    }
     let pList = this.data.pList.map(item => {
       if (item.itemId === item_id) {
         return Object.assign({}, item, {
@@ -200,12 +218,23 @@ Page({
     })
   },
   submitAnswer:function(e){
+
+    if(!matchInfo.itemId){
+      wx.showToast({
+        title: '请先竞猜淘汰题',
+        icon: 'none',  //图标，支持"success"、"loading"
+        mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
+      })
+      return
+    }
+
     const { matchInfo, pList } = this.data
     let answerList = [{
       itemId: +matchInfo.itemId,
       answerId: +matchInfo.selectAnswerId,
       type: 0
     }];
+
 
     pList.forEach(item => {
       answerList.push({

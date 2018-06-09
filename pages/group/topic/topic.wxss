@@ -73,6 +73,17 @@
 .answer-list .option .answer-item.selected {
 	background: #f7c83a;
 }
+.answer-list .option .answer-item.correct-answer {
+	color: white;
+	background: #33bb62 !important;
+}
+.answer-list .option.open .answer-item.user-answer {
+	background: #f7c83a;
+}
+.answer-list .option .answer-item.user-answer {
+	color: white;
+	background: #ed3829;
+}
 
 .group-info{
 	background:  #0c389b;
