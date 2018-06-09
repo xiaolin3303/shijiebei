@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
@@ -87,6 +87,12 @@
 					"id": -1,
 					"name": "说明",
 					"pathName": "pages/instruction/instruction",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "冠军赛",
+					"pathName": "pages/personal/champion/champion",
 					"query": ""
 				}
 			]

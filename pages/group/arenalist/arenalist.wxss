@@ -27,14 +27,32 @@
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
 	color : #fff;
-	padding : 2px;
+	padding : 5rpx 10rpx;
+	box-sizing: border-box;
 }
 .box{
 	padding : 3px;
-	height : 170rpx;
+	height : 190rpx;
 }
 .bottom.bottom-active{
 	background:#e5b012;
+	color: #ba5800;
+}
+.ftstress {
+	color: #ba5800;
+}
+.caption-figure {
+	width: 290rpx;
+	height: 60rpx;
+	margin-left: auto;
+	margin-right: auto;
+}
+.caption-figure.active {
+	height: 130rpx;
+	margin-top: 0 !important;
+}
+.caption-figure.middle {
+	margin-top: 40rpx;
 }
 .open-arena{
 	height:42px;
@@ -43,12 +61,8 @@
 
 }
 .lock{
-
 	width:11px;
 	height:14px;
-	position:relative;
-	bottom:-14px;
-	left:34px;
 }
 .status{
 	height : 20px;
@@ -56,11 +70,4 @@
 .bottom.grey-bottom{
 	background : #edeef2;
 	color :#858688;
-}
-.battle-name{
-  width:267rpx;
-  height:121rpx;
-  position: relative;
-  top: 10rpx;
-  left:20rpx;
 }

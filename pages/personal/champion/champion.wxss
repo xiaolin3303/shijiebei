@@ -204,6 +204,7 @@ swiper{
 	border-radius: 8px;
 	background: #fff;
 	padding-top: 5px;
+	padding-bottom:20rpx;
 }
 .champion-match .item{	
 	border-radius: 10px;
@@ -221,17 +222,19 @@ swiper{
 }
 
 .champion-match .vote-count{	
-	font-size: 16px;
 	color: #ed3829;
 }
 
-.champion-match.selected .vote-champion {
+.champion-match.selected .box {
 	background: #f7c83b;
 }
-.champion-country,.vote-champion{
-	font-size : 15px;
-	margin-top :10px;
 
+.champion-match.selected .box .vote-champion {
+	background: #e8b006;
+}
+.champion-country{
+	font-size : 15px;
+	margin-top: 10px;
 }
 .deadline{
 	color : #fff;
@@ -240,13 +243,19 @@ swiper{
 	text-align : center;
 }
 .vote-champion{
-	background : #edeef2;
+	margin-top: 10rpx;
+	font-size : 15px;
+	background : #f7c83b;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	position :relative ;
 	bottom : 0px;
 	height : 35px;
 	line-height : 35px;
+	width: 200rpx;
+	border-radius: 30rpx;
+	margin-left: auto;
+	margin-right: auto;
 }
 .champion-wrapper{
 	height : 100%;

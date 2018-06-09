@@ -85,14 +85,17 @@ Page({
       data,
       success: (res)=> {
         if(res.data.ret === 0){
-            this.setData({
-              selectChampion: teamid
-            })
-            wx.showToast({
-              title: '成功',  //标题
-              icon: 'success',  //图标，支持"success"、"loading"
-              mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
-            })
+          this.setData({
+            selectChampion: teamid
+          })
+          wx.showToast({
+            title: '成功',  //标题
+            icon: 'success',  //图标，支持"success"、"loading"
+            mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
+          })
+          wx.redirectTo({
+            url: 'pages/personal/champion/champion'
+          })
         }else{
             wx.showToast({
               title: res.data.msg || '投票失败',  //标题

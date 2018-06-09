@@ -6,7 +6,7 @@
   >
   </navtab>
 
-  <view class = " mt40 {{currentTab == 0 ? '' : 'none' }}" style="margin-top:46px;">
+  <view class = "{{currentTab == 0 ? '' : 'none' }}" style="margin-top:92rpx;">
     <view class="tac ft35 fcwhite" style="padding-top :15px;font-size:15px;">比赛结束</view>
     <view class="group-match-list" style="padding-bottom: 0">
       <view class="match"  wx:for="{{groupListData}}" wx:for-index="index" wx:for-item="group" wx:key="group" wx:if="{{group.ban_play === 1}}">
@@ -14,9 +14,8 @@
           <view class="item-group">
             <view>{{group.group_id}}</view>
             <view>组</view>
-
           </view>
-          <image class="subscript" src="/assets/icons/jiaobiao.png"></image>
+          <!-- <image class="subscript" src="/assets/icons/jiaobiao.png"></image> -->
           <view class="item" style="justify-content: flex-start; padding-left: 20rpx">
             <view class="country">
               <text>{{group.team_name1}}</text>

@@ -59,6 +59,26 @@ Page({
         groupId,
       },
       success: (res) => {
+        // res.data.data.push({
+        //   battle_desc: '两牙之争',
+        //   battle_id: 1,
+        //   status: 2,
+        //   picture: "http://yyb.gtimg.com/fibadcms_img/adcms/91ebdb3ff81fd0e3b70af866b5640d951528362644269391.png",
+        //   begin_time: '2018-06-06 12:00:00',
+        //   deadline: '2018-06-14 21:00:00'
+        // });
+        res.data.data = res.data.data.map(battle => {
+          const { begin_time, deadline } = battle
+          let startDate = new Date(begin_time);
+          let endDate = new Date(deadline);
+          let displayEndTime = `${endDate.getFullYear()}/${endDate.getMonth()+1}/${endDate.getDate()}`;
+          let displayStartEndTime = `${startDate.getFullYear()}/${startDate.getMonth()+1}/${startDate.getDate()}-${endDate.getMonth()+1}/${endDate.getDate()}`;
+        
+          return Object.assign({}, battle, {
+            displayEndTime,
+            displayStartEndTime
+          });
+        });
         this.setData({
             battleList: res.data.data
         })
@@ -78,7 +98,7 @@ Page({
   gotoTopic :function(e){
 
     const { status } = e.currentTarget.dataset
-    if (status == 1) {    
+    if (status == 1 || status == 2) {    
       wx.navigateTo({
         url: `../topic/topic?battleId=${this.data.battleId}`
       })

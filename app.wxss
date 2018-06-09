@@ -49,7 +49,9 @@ page {
 	color: white;
 }
 
-.mt10 {
+.mt5 {
+	margin-top: 5rpx;
+}.mt10 {
 	margin-top: 10rpx;
 }
 .mt20 {
@@ -103,6 +105,9 @@ page {
 
 .fwbold {
 	font-weight: bold;
+}
+.mr5 {
+	margin-right: 5px;
 }
 
 .mr10 {
