@@ -127,7 +127,7 @@
         </view>
       </view>
       <view class="col-auto btn-wrapper">
-        <button bindtap="submitGroupRes ft17">确认</button>
+        <button bindtap="submitGroupRes">确认</button>
       </view>
     </view>
   </view>
