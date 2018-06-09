@@ -67,8 +67,15 @@
 	width:70%;
 	font-size:12px;
 	margin-bottom:15px;
-	padding:4px 0px;
-
+	padding:15px 0px;
+}
+.select-btn.correct-answer {
+	color: white;
+	background: #33bb62 !important;
+}
+.select-btn.user-answer {
+	color: white;
+	background: #ed3829;
 }
 .item-group {
 	position:relative;

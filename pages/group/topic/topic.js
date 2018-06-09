@@ -3,7 +3,7 @@
 //获取应用实例
 const app = getApp();
 const Host = require("../../../config/host.config"); 
-const username = wx.getStorageSync('username');
+const username = wx.getStorageSync('username') || 'viinyxu';
 const getData = require("../../../model/dataModel");
 
 Page({
@@ -97,7 +97,8 @@ Page({
               team_name1 : item.team1,
               team_name2 : item.team2,
               group_id : item.scheduleGroup,
-              selectAnswerId: item.alreadyAnswer
+              selectAnswerId: item.alreadyAnswer,
+              correctAnswer: item.correctAnswer
           }
         })
 

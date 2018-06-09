@@ -7,7 +7,7 @@ App({
 
     const rtxUsername = wx.getStorageSync('username');
     const userInfo = wx.getStorageSync('userInfo');
-
+    // return
     if (!rtxUsername || !userInfo) {    
       // wx.login({
       //   success: function(res) {

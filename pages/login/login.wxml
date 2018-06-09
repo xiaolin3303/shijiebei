@@ -1,4 +1,9 @@
 <!--pages/login/login.wxml-->
 <view class="container">
-	<button open-type="getUserInfo" bindgetuserinfo="getUserInfo">Login</button>
+	<image class="banner" src="/assets/index-banner.jpg" mode="scaleToFill"></image>
+	<view class="entry-container">
+		<image class="login-btn" src="/assets/login-btn.jpg"></image>
+		<image class="football" src="/assets/football.png"></image>		
+		<button open-type="getUserInfo" class="wx-login" bindgetuserinfo="getUserInfo"></button>
+	</view>
 </view>

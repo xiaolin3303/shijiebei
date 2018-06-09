@@ -8,10 +8,11 @@ const username = wx.getStorageSync('username');
 
 Page({
   data: {
-    currentTab: 0,
+    currentTab: 1,
     playerList : [],
     groupList : [],
-    battleList : []
+    battleList : [],
+    currentBattle: null
   },
   onLoad:function(e) {
 
@@ -44,8 +45,10 @@ Page({
         groupId:9283,
       },
       success: (res) => {
+        this.getBattleRankData(res.data.data[0].battle_id)
         this.setData({
-            battleList: res.data.data
+            battleList: res.data.data,
+            currentBattle: res.data.data[0].battle_id
         })
         if (res.data.ret == -102) {
           wx.showToast({
@@ -59,7 +62,10 @@ Page({
       }
     })
 
-    const groupRankurl = `${Host.service}/GetGroupRank?battleId=1`
+  },
+
+  getBattleRankData: function (battleId) {
+    const groupRankurl = `${Host.service}/GetGroupRank?battleId=${battleId}`
       wx.request({
 
       url:groupRankurl,
@@ -79,7 +85,6 @@ Page({
         })
       }
     });
-
   },
 
   //切换tab,个人赛分类
@@ -99,7 +104,9 @@ Page({
   changeBattle:function(e){
 
       const {battleid} = e.currentTarget.dataset;
-
+      this.setData({
+        currentBattle: battleid
+      })
       const url = `${Host.service}/GetGroupRank?battleId=${battleid}`
       wx.request({
 

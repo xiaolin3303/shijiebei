@@ -14,6 +14,7 @@
       group="{{matchInfo}}"
       answerId="{{matchInfo.selectAnswerId}}"
       forecastScore="{{10}}"
+      disabled="{{matchInfo.correctAnswer !== -1}}"
       bind:selectAnswer="selectMatchAnswer"
     >
     </matchinfo>
