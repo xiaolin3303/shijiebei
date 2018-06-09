@@ -97,9 +97,13 @@ Page({
 
           }else if(teamList.length == 4){
 
-
-                buttonCnt =  'goanena'
-       
+                const {isStartTime} = this.data;
+                if(isStartTime){
+                  buttonCnt =  'goanena'
+                }else{
+                  buttonCnt = 'undergoing'
+                }
+                
           }else if(teamList.length > 4){
               teamList.length = 4 ;
               buttonCnt = ''
@@ -209,12 +213,7 @@ Page({
         }, 
         data,
         success: function(res) {
-          wx.showToast({
-            title: res.data.msg,  //标题  
-            width: 200,
-            icon: 'success', 
-            mask: false,  
-          })
+
           if(res.data.ret == 0){
 
             wx.showToast({  
@@ -222,13 +221,26 @@ Page({
               icon: 'success',  //图标，支持"success"、"loading"  
               mask: false,   
             }) 
+          }else{
+            wx.showToast({
+              title: res.data.msg,  //标题  
+              width: 200,
+              icon: 'none', 
+              mask: false,  
+            })
           }
         }
       })
   },
   gotoAnera:function(e){
+
+    const {buttonCnt,groupId} = this.data;
+
+    if(buttonCnt == 'undergoing'){
+      return ;  
+    }
     wx.navigateTo({
-        url: `../arenalist/arenalist`
+        url: `../arenalist/arenalist?groupId=${groupId}`
     })
   },
   hideCover:function(e){

@@ -8,7 +8,7 @@
 	    <view class="userinfo" wx:for="{{teamInfo[1]}}" wx:for-item="teamInfoItem" wx:key="teamInfoIndex">
         <view class="captain"
           wx:if="{{ teamInfo[0].groupLeader === teamInfoItem.userId }}">队长</view>
-	      <image bindtap="bindViewTap" class="userinfo-avatar {{teamInfoItem.is_alive}}" src="{{teamInfoItem.avatar}}" mode="cover"></image>
+	      <image bindtap="bindViewTap" class="userinfo-avatar {{teamInfoItem.is_alive == 0 ? 'gray': ''}}" src="{{teamInfoItem.avatar}}" mode="cover"></image>
 	      <view class="mt20 ft25">{{teamInfoItem.userId}}</view>
 	      <view class="mt20 ft25">{{teamInfoItem.score}}</view>       
 	    </view>

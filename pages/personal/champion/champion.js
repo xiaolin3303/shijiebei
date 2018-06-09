@@ -6,7 +6,8 @@ const getData = require("../../../model/dataModel");
 const testData = require("../../../test/testData");
 const championList  = require("../../../test/championList");
 const sepcTime = require("../../../config/specTimeConfig");
-const username = wx.getStorageSync('username')
+const username = wx.getStorageSync('username');
+const Host = require("../../../config/host.config");
 
 Page({
   data: {
@@ -20,15 +21,15 @@ Page({
   },
   onLoad:function(e) {
 
-    wx.request({
-
-      url: 'https://yybopworldcup2018147.sparta.html5.qq.com/ajax/GetChampionList',
-      data: {
+   const url = `${Host.service}/GetChampionList`;
+    getData(
+      url,
+      {
         user_id: username
       },
-      method : 'get',
-      success: (res)=> {
-        if(res.data.ret == -102){
+      'get',
+      (res) => {
+        if(res.ret == -102){
             wx.showToast({
               title: '您没有权限，请联系管理员开通',  //标题
               width : 200,
@@ -37,18 +38,14 @@ Page({
             })
         }
 
-        //后端数据结构问题，没有语义化
-        // res.data.win_team_id = 0
-        // res.data.answer_team_id = 1
-
         this.setData({
-          championData: res.data.data,
-          result: res.data,
-          selectChampion: res.data.answer_team_id,
-          win_user_id: res.data.win_user_id
+          championData: res.data,
+          result: res,
+          selectChampion: res.answer_team_id,
+          win_user_id: res.win_user_id
         })
       }
-    })
+    );
 
   },
 
@@ -76,10 +73,11 @@ Page({
         team_id : teamid,
         user_id : username
     }
+    const url = `${Host.service}/InsertChampion`;
 
     wx.request({
 
-      url: 'https://yybopworldcup2018147.sparta.html5.qq.com/ajax/InsertChampion',
+      url,
       method : 'post',
       header: {
         'content-type': 'application/x-www-form-urlencoded'

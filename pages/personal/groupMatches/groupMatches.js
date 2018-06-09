@@ -27,15 +27,15 @@ Page({
   },
 
   getGroupListData() {
+
     const url = `${Host.service}/GetBetList?`;
-    wx.request({
+    getData(
       url,
-      method: 'get',
-      data: {
+      {
         user_id: username
       },
-      success: (res) => {
-
+      'get',
+      (res) => {
         if (res.data.ret == -102) {
           wx.showToast({
             title: '您没有权限，请联系管理员开通',  //标题
@@ -51,7 +51,7 @@ Page({
         // res.data.data[0].win_team = 99
 
         let quizres = Object.assign({}, this.data.quizRes)
-        const groupRes = res.data.data.map(group => {
+        const groupRes = res.data.map(group => {
           const answerlist = group.answerlist.map(answer => Object.assign({}, answer, { odd: +answer.odd / 100}))
           return Object.assign({}, group, { answerlist })
         });
@@ -62,7 +62,9 @@ Page({
             quizres = Object.assign(quizres, {
               [group.item_id]: {
                 answerid: group.player_answer_id,
-                forecastScore: group.player_answer_id === group.win_team ? Math.floor(100 * group.answerlist.filter(answer => answer.answer_id === group.player_answer_id)[0].odd) : 0,
+                forecastScore: group.ban_play === 1
+                               ? (group.player_answer_id === group.win_team ? Math.floor(100 * group.answerlist.filter(answer => answer.answer_id === group.player_answer_id)[0].odd) : 0)
+                               : (Math.floor(100 * group.answerlist.filter(answer => answer.answer_id === group.player_answer_id)[0].odd) || 0),
                 closed: group.ban_play === 1
               }
             });
@@ -77,9 +79,9 @@ Page({
           totalScore : totalScore,
           groupListData: groupRes,
         })
-
       }
-    })
+    );
+
   },
 
   //切换tab,个人赛分类
@@ -226,74 +228,74 @@ Page({
       let mydata = this.data
       const quizRes = this.data.quizRes
 
-      const url = `${Host.service}/GetIntellRst?`;
-      wx.request({
-        url,
-        method : 'get',
-        data : {
-            username
-        },
-        success: (res)=> {
 
-            if(res.data.ret == -102){
+    const url = `${Host.service}/GetIntellRst?`;
+    getData(
+      url,
+      {
+        username
+      },
+      'get',
+      (res) => {
+        if(res.data.ret == -102){
 
-                wx.showToast({
-                  title: '您没有权限，请联系管理员开通',  //标题
-                  width : 200,
-                  icon: 'success',  //图标，支持"success"、"loading"
-                  mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
-                })
-            }
+          wx.showToast({
+                title: '您没有权限，请联系管理员开通',  //标题
+                width : 200,
+                icon: 'success',  //图标，支持"success"、"loading"
+                mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
+              })
+          }
 
-            const intellRst = res.data.data;
-            let quizResVar = {}
+          const intellRst = res.data;
+          let quizResVar = {}
 
-            const groupRes = mydata.groupListData.map(group => {
+          const groupRes = mydata.groupListData.map(group => {
 
-                intellRst.map((intellItem) => {
-                  const {item_id,answer_id} = intellItem;
+              intellRst.map((intellItem) => {
+                const {item_id,answer_id} = intellItem;
 
-                  if (group.item_id !== item_id){
-                    return false
+                if (group.item_id !== item_id){
+                  return false
+                }
+                if (quizRes[group.item_id] && quizRes[group.item_id].answerid) {
+                  return false
+                }
+                if (group.player_answer_id !== 0) {
+                  return false
+                }
+                if (group.ban_play === 1) {
+                  return false
+                }
+
+                let currentAnswer = group.answerlist.filter(v => v.answer_id === answer_id)
+
+                if (currentAnswer && currentAnswer[0]) {
+                  quizResVar[item_id] = {
+                    answerid: answer_id,
+                    forecastScore: Math.ceil(100 * currentAnswer[0].odd)
                   }
-                  if (quizRes[group.item_id] && quizRes[group.item_id].answerid) {
-                    return false
-                  }
-                  if (group.player_answer_id !== 0) {
-                    return false
-                  }
+                }
 
-                  if (group.ban_play === 1) {
-                    return false
-                  }
+              })
 
-                  let currentAnswer = group.answerlist.filter(v => v.answer_id === answer_id)
-                  if (currentAnswer && currentAnswer[0]) {
-                    quizResVar[item_id] = {
-                      answerid: answer_id,
-                      forecastScore: Math.ceil(100 * currentAnswer[0].odd)
-                    }
-                  }
+              return group
+          })
 
-                })
+          quizResVar = Object.assign({}, this.data.quizRes, quizResVar)
 
-                return group
+          const totalScore = Object.keys(quizResVar).reduce((acc, groupId) => {
+            const quiz = quizResVar[groupId];
+            return acc + (quiz.forecastScore && quiz.closed !== true ? quiz.forecastScore : 0)
+          }, 0)
 
-            })
+          this.setData({
+            quizRes: quizResVar,
+            totalScore
+          });
+      }
+    );
 
-            quizResVar = Object.assign({}, this.data.quizRes, quizResVar)
-
-            const totalScore = Object.keys(quizResVar).reduce((acc, groupId) => {
-              const quiz = quizResVar[groupId];
-              return acc + (quiz.forecastScore && quiz.closed !== true ? quiz.forecastScore : 0)
-            }, 0)
-
-            this.setData({
-              quizRes: quizResVar,
-              totalScore
-            });
-        }
-      })
   }
 
 })

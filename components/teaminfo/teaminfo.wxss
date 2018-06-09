@@ -133,3 +133,6 @@
   top:-5rpx;
   position:absolute;
 }
+.userinfo-avatar.gray{
+	opacity : .4;
+}

@@ -92,7 +92,7 @@ page {
 }
 
 .ft11 {
-	font-size: 11rpx;
+	font-size: 11px;
 }
 
 .ft15 {
