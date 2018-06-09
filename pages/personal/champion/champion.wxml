@@ -9,7 +9,7 @@
   <view class = "{{result.win_team_id  ? 'none' : '' }}" style="margin-top:46px;">
     <view class='deadline' style="padding-top :15px;font-size:15px;">投票截止时间：2018/06/14 18:00</view>
       <view class="champion-match-list">
-        <view class="champion-match {{ selectChampion === champion.team_id ? 'selected' : ''}}" wx:for="{{championData}}" wx:for-index="i" wx:for-item="champion" wx:key="champion" data-championid="{{champion.team_id1}}" >
+        <view class="champion-match {{ selectChampion === champion.team_id ? 'selected' : ''}}" wx:for="{{championData}}" wx:for-index="i" wx:for-item="champion" wx:key="champion" data-championid="{{champion.team_id}}" >
           <view class="box" >
             <view class="item">
                 <view class="row champion-name">
@@ -17,8 +17,8 @@
                   <view class="champion-country">{{champion.team_name}}</view>
                 </view>
    
-                <view style="font-size:12px;">目前竞猜人数：
-                  <text class="vote-count">{{champion.vote_num}}</text>
+                <view style="font-size:12px;">目前竞猜人数:
+                  <text class="vote-count ft17">{{champion.vote_num}}</text>
                 </view>
                 <view 
                   class="vote-champion" 

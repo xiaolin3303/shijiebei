@@ -51,7 +51,10 @@ Page({
         // res.data.data[0].win_team = 99
 
         let quizres = Object.assign({}, this.data.quizRes)
-        const groupRes = res.data.data;
+        const groupRes = res.data.data.map(group => {
+          const answerlist = group.answerlist.map(answer => Object.assign({}, answer, { odd: +answer.odd / 100}))
+          return Object.assign({}, group, { answerlist })
+        });
         groupRes.forEach(group => {
 
           if (group.player_answer_id > 0) {
@@ -59,17 +62,19 @@ Page({
             quizres = Object.assign(quizres, {
               [group.item_id]: {
                 answerid: group.player_answer_id,
-                forecastScore: 100 * group.answerlist.filter(answer => answer.answer_id === group.player_answer_id)[0].odd
+                forecastScore: group.player_answer_id === group.win_team ? Math.floor(100 * group.answerlist.filter(answer => answer.answer_id === group.player_answer_id)[0].odd) : 0,
+                closed: group.ban_play === 1
               }
             });
           }
         })
         const totalScore = Object.keys(quizres).reduce((acc, groupId) => {
-          return acc + (quizres[groupId].forecastScore || 0)
+          const quiz = quizres[groupId];
+          return acc + (quiz.forecastScore && quiz.closed !== true ? quiz.forecastScore : 0)
         }, 0)
         this.setData({
           quizRes: quizres,
-          totalScore : totalScore/100,
+          totalScore : totalScore,
           groupListData: groupRes,
         })
 
@@ -113,7 +118,8 @@ Page({
       })
 
       const totalScore = Object.keys(quizres).reduce((acc, groupId) => {
-        return acc + (quizres[groupId].forecastScore || 0)
+        const quiz = quizres[groupId];
+        return acc + (quiz.forecastScore && quiz.closed !== true ? quiz.forecastScore : 0)
       }, 0)
 
       this.setData({
@@ -135,10 +141,20 @@ Page({
 
       })
 
+      // quizRes需要保留close=true的数据
+      let filterQuizRes = {}
+      Object.keys(this.data.quizRes).forEach(itemId => {
+        if (this.data.quizRes[itemId].closed === true) {
+          filterQuizRes[itemId] = this.data.quizRes[itemId]
+        }
+      })
+
+      console.log(filterQuizRes)
+
       this.setData({
         groupListData: groupRes,
         selectData : [],
-        quizRes : -1,
+        quizRes : filterQuizRes,
         totalScore: 0
       })
 
@@ -252,11 +268,10 @@ Page({
                   }
 
                   let currentAnswer = group.answerlist.filter(v => v.answer_id === answer_id)
-
                   if (currentAnswer && currentAnswer[0]) {
                     quizResVar[item_id] = {
                       answerid: answer_id,
-                      forecastScore: 100 * parseInt(currentAnswer[0].odd)
+                      forecastScore: Math.ceil(100 * currentAnswer[0].odd)
                     }
                   }
 
@@ -269,7 +284,8 @@ Page({
             quizResVar = Object.assign({}, this.data.quizRes, quizResVar)
 
             const totalScore = Object.keys(quizResVar).reduce((acc, groupId) => {
-              return acc + (quizResVar[groupId].forecastScore || 0)
+              const quiz = quizResVar[groupId];
+              return acc + (quiz.forecastScore && quiz.closed !== true ? quiz.forecastScore : 0)
             }, 0)
 
             this.setData({
