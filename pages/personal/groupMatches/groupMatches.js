@@ -23,7 +23,8 @@ Page({
     banGroupList: [],
     lastBanGroup: {},
     displayBanGroup: [],
-    showMoreBanGroup: false
+    showMoreBanGroup: false,
+    hasUndergoing : false
   },
 
   onLoad:function(e) {
@@ -61,13 +62,16 @@ Page({
         // res.data.data[0].player_answer_id = 99
         // res.data.data[0].win_team = 99
 
-        let quizres = Object.assign({}, this.data.quizRes)
+        let quizres = Object.assign({}, this.data.quizRes);
+        let hasUndergoing = false;
+
         const groupRes = res.data.map(group => {
           const answerlist = group.answerlist.map(answer => Object.assign({}, answer, { odd: +answer.odd / 100}))
           return Object.assign({}, group, { answerlist })
         });
         groupRes.forEach(group => {
           let matchAnswer = group.answerlist.filter(answer => answer.answer_id === group.player_answer_id)
+          
           matchAnswer = matchAnswer.length ? matchAnswer[0] : null
           if (group.player_answer_id > 0) {
             // 用户之前选择过该答案
@@ -75,11 +79,14 @@ Page({
               [group.item_id]: {
                 answerid: group.player_answer_id,
                 forecastScore: group.ban_play === 1
-                               ? (group.player_answer_id === group.win_team ? Math.floor(100 * group.answerlist.filter(answer => answer.answer_id === group.player_answer_id)[0].odd) : 0)
-                               : (Math.floor(100 * (matchAnswer ? +matchAnswer.odd : 0)) || 0),
+                               ? (group.player_answer_id === group.win_team ? Math.round(100 * (matchAnswer ? +matchAnswer.odd : 0)) : 0)
+                               : (Math.round(100 * (matchAnswer ? +matchAnswer.odd : 0)) || 0),
                 closed: group.ban_play === 1
               }
             });
+          }
+          if(group.ban_play == 0){
+              hasUndergoing = true
           }
         })
 
@@ -90,13 +97,15 @@ Page({
         const banGroupList = groupRes.filter(group => group.ban_play === 1);
         const lastBanGroup = banGroupList.length ? banGroupList[banGroupList.length  - 1] : {}
         const displayBanGroup = [lastBanGroup]
+        console.log(groupRes)
         this.setData({
           quizRes: quizres,
           totalScore : totalScore,
           groupListData: groupRes,
           banGroupList,
           lastBanGroup,
-          displayBanGroup
+          displayBanGroup,
+          hasUndergoing
         })
       }
     );

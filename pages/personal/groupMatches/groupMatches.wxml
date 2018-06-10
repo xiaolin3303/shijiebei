@@ -69,7 +69,7 @@
       </view>
     </block>
 
-    <view class="tac fcwhite ft15">竞猜中</view>
+    <view class="tac fcwhite ft15 {{banGroupList.length ==0  ? 'top-text' : ''}} "wx:if="{{hasUndergoing}}">竞猜中</view>
     <view class="group-match-list">
       <view class="match"  wx:for="{{groupListData}}" wx:for-index="index" wx:for-item="group" wx:key="group" wx:if="{{group.ban_play !== 1}}">
         <view class="box">

@@ -263,6 +263,9 @@ swiper{
 	bottom:-45rpx;
 
 }
+.top-text{
+	padding-top :30rpx;
+}
 
 
 
