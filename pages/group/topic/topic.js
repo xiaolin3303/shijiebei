@@ -170,8 +170,11 @@ Page({
           const currentRound = battleInfo.filter(item => {
              return item.status == 1 ;
           })
-          currentTab = currentRound[0].rounds;
-          currentStatus = currentRound[0].status ;
+
+          currentTab = currentRound.length ? currentRound[0].rounds : 1;
+          currentStatus = currentRound.length&&  currentRound[0].status || battleInfo[currentTab-1].status;
+
+
           if (currentTab !== roundsId) {
             this.getGroupBetList(battleId, currentTab, currentStatus)
             return

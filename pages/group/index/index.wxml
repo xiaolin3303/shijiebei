@@ -70,7 +70,7 @@
       <view class=" ft11 tac mb20 wrapper-tip" style='bottom:-10rpx;'>未组队成功人员系统将智能匹配</view>
     </view>
     
-    <view class= "{{buttonCnt === 'goanena' ? '':'none'}}">
+    <view class= "{{buttonCnt === 'goanena' && isMyTeam? '':'none'}}">
 
       <view
         class="invite-btn"
@@ -80,7 +80,7 @@
       <view class=" ft11 tac wrapper-tip">每个队员积分将累积到战队成绩，影响整体排名</view>
     </view>
 
-    <view class= "{{buttonCnt === 'undergoing' ? '':'none'}}">
+    <view class= "{{buttonCnt === 'undergoing' && isMyTeam ? '':'none'}}">
 
       <view
         class="invite-btn gray-btn">

@@ -26,6 +26,7 @@ Page({
     groupLeader: '',
     isGroupLeader: '',
     isStartTime : +new Date() > sepcTime.GOURP_START_TIME,
+    isMyTeam : true
   },
   //事件处理函数
   bindVote: function() {
@@ -91,18 +92,17 @@ Page({
             return 
           }
 
-          // if (res.ret == -102) {
-          //   wx.showToast({
-          //     title: '您没有权限，请联系管理员开通',  //标题  
-          //     width: 200,
-          //     icon: 'success', 
-          //     mask: false,  
-          //   })
-          // }
-
 
           let teamList  = res && res.data[1];
           let buttonCnt = '';
+          let isMyTeam =  true;
+          let MyTeam = teamList.filter(item => {
+            return  item.userId == username
+          })
+
+          if(!MyTeam.length){
+            isMyTeam = false 
+          }
 
           if(teamList.length < 4){
 
@@ -121,12 +121,6 @@ Page({
 
                 const {isStartTime} = this.data;
 
-                wx.showToast({
-                  title: isStartTime.toString(),  //标题  
-                  width: 200,
-                  icon: 'success', 
-                  mask: false,  
-                })
                 if(isStartTime){
                   buttonCnt =  'goanena'
                 }else{
@@ -148,7 +142,8 @@ Page({
             groupLeader,
             teamList,
             teamBase,
-            buttonCnt
+            buttonCnt,
+            isMyTeam
           })
         })
   },

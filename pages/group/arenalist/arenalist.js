@@ -34,7 +34,7 @@ Page({
       url,
       method: 'get',
       data: {
-        userId: token,
+        userId: username,
         battleId: 0
       },
       success: (res) => {
