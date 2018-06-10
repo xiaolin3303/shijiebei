@@ -8,6 +8,10 @@ const getData = require("../../../model/dataModel");
 const token = wx.getStorageSync('token');
 //const username ="carlsonlin"
 
+const formatTime = v => {
+  return v < 10 ? `0${v}` : v
+}
+
 Page({
   data: {
     matchInfo: {},
@@ -23,7 +27,8 @@ Page({
     isChoosed : false,
     isAlive : true,
     battleId : '',
-    battleInfo: []
+    battleInfo: [],
+    matchDeadLine: ''
   },
 
   onLoad: function (opt) {
@@ -91,6 +96,8 @@ Page({
         let matchInfo = {}
         let bPlist = [];
 
+        let matchDeadLine = new Date(+res.data.answerDeadLine * 1000);
+        matchDeadLine = `${matchDeadLine.getFullYear()}-${formatTime(matchDeadLine.getMonth() + 1)}-${formatTime(matchDeadLine.getDate())} ${formatTime(matchDeadLine.getHours())}:${formatTime(matchDeadLine.getMinutes())}`;
         blist.map( item => {
 
           if(item.isBet == 1 ){
@@ -105,7 +112,6 @@ Page({
                 }
                 answerlist.push(answer);
             });
-
             matchInfo = {
                 answerlist,
                 itemId: item.itemId,
@@ -115,7 +121,7 @@ Page({
                 selectAnswerId: item.alreadyAnswer,
                 correctAnswer: item.correctAnswer,
                 actualScore: 0,
-                itemScore: item.score
+                itemScore: item.score,
             }
             if (item.correctAnswer > -1) {
               // 结束状态
@@ -180,7 +186,8 @@ Page({
           pList,
           battleInfo,
           currentTab,
-          status : currentStatus  
+          status : currentStatus,
+          matchDeadLine
         })
       }
     );

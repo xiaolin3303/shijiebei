@@ -102,6 +102,19 @@
 	border-bottom-right-radius: 10px;
 	display : flex ;
 	width : 100%;
+
+}
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.row > .col {
+	flex: 1;
+}
+
+.row > .col-auto {
+	flex: 0 1 auto;
 }
 .tip-msg {
 	color: #ed3829;
@@ -110,8 +123,7 @@
 .forecast-score{
 	
 	color: #1f663b;
-	position:absolute;
-	right:12px;
+	margin-right:12px;
 
 }
 .subscript{
