@@ -23,11 +23,9 @@
 	    </view>
 	  </view>
 	</view>
-	<view class="item-bottom">
-	  <view class="tip-msg">
-	    竞猜截止时间：{{group.deadline}}
-	  </view>
-	  <view class="forecast-score">预计得分:{{forecastScore || 0}}</view>
+	<view class="item-bottom row">
+	  <view class="tip-msg col"></view>
+	  <view class="forecast-score col-auto">{{disabled === true ? '实际得分' : '预计得分'}}:{{forecastScore || 0}}</view>
 	</view>
 </view>
 

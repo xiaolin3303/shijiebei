@@ -8,6 +8,7 @@ const championList  = require("../../../test/championList");
 const sepcTime = require("../../../config/specTimeConfig");
 const username = wx.getStorageSync('username');
 const Host = require("../../../config/host.config");
+const token = wx.getStorageSync('token');
 
 Page({
   data: {
@@ -71,7 +72,7 @@ Page({
     const {teamid} = e.currentTarget.dataset;
     const data = {
         team_id : teamid,
-        user_id : username
+        user_id : token
     }
 
       wx.showModal({  

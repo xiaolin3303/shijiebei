@@ -5,7 +5,12 @@ const app = getApp();
 const Host = require("../../../config/host.config"); 
 const username = wx.getStorageSync('username');
 const getData = require("../../../model/dataModel");
+const token = wx.getStorageSync('token');
 //const username ="carlsonlin"
+
+const formatTime = v => {
+  return v < 10 ? `0${v}` : v
+}
 
 Page({
   data: {
@@ -22,7 +27,8 @@ Page({
     isChoosed : false,
     isAlive : true,
     battleId : '',
-    battleInfo: []
+    battleInfo: [],
+    matchDeadLine: ''
   },
 
   onLoad: function (opt) {
@@ -48,8 +54,19 @@ Page({
       },
       'get',
       (res) => {
-        const blist  = res.data.bList;     
+        const blist  = res.data.bList;
+        // blist[0].alreadyAnswer = 0;
+        // blist[0].alreadyAnswer = -1;
+        // blist[0].correctAnswer = -1;
+
+        // blist[1].alreadyAnswer = 0;
+        // blist[1].alreadyAnswer = 1;
+        // blist[1].correctAnswer = -1;
         const battleInfo = res.data.battleInfo;
+
+        // res.data.qList[0].alreadyAnswer = 0;
+        // res.data.qList[0].alreadyAnswer = 1;
+        // res.data.qList[0].correctAnswer = -1;
 
         const pList = res.data.qList.map(item => {
           let answerSummary = Object.keys(item.answerSummary).map(key => ({
@@ -57,8 +74,17 @@ Page({
             value: item.answerSummary[key]
           }))
           let actualScore = 0;
-          if (answerSummary.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
-            actualScore = +item.itemScore;
+          let matchAnswer = item.alreadyAnswer
+          if (item.correctAnswer > -1) {
+            // 结束状态
+            if (item.correctAnswer === item.alreadyAnswer) {
+              // 并回答正确            
+              actualScore = +item.itemScore;
+            }
+          } else {          
+            if (answerSummary.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
+              actualScore = +item.itemScore;
+            }
           }
           return Object.assign({}, item, {
             selectAnswerId: item.alreadyAnswer,
@@ -70,6 +96,8 @@ Page({
         let matchInfo = {}
         let bPlist = [];
 
+        let matchDeadLine = new Date(+res.data.answerDeadLine * 1000);
+        matchDeadLine = `${matchDeadLine.getFullYear()}-${formatTime(matchDeadLine.getMonth() + 1)}-${formatTime(matchDeadLine.getDate())} ${formatTime(matchDeadLine.getHours())}:${formatTime(matchDeadLine.getMinutes())}`;
         blist.map( item => {
 
           if(item.isBet == 1 ){
@@ -84,7 +112,6 @@ Page({
                 }
                 answerlist.push(answer);
             });
-
             matchInfo = {
                 answerlist,
                 itemId: item.itemId,
@@ -94,12 +121,20 @@ Page({
                 selectAnswerId: item.alreadyAnswer,
                 correctAnswer: item.correctAnswer,
                 actualScore: 0,
-                itemScore: item.score
+                itemScore: item.score,
+            }
+            if (item.correctAnswer > -1) {
+              // 结束状态
+              if (item.correctAnswer === item.alreadyAnswer) {
+                // 并回答正确            
+                matchInfo.actualScore = +item.score;
+              }
+            } else {          
+              if (answerlist.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
+                matchInfo.actualScore = +item.score;
+              }
             }
 
-            if (answerlist.filter(answer => answer.answer_id === matchInfo.selectAnswerId).length) {
-              matchInfo.actualScore = item.score
-            }
           }else if (item.isBet == 0 ){
 
             let answerSummary  = Object.keys(item.answerSummary).map(key => ({
@@ -107,8 +142,16 @@ Page({
               value: item.answerSummary[key]
             }))
             let actualScore = 0;
-            if (answerSummary.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
-              actualScore = +item.itemScore;
+            if (item.correctAnswer > -1) {
+              // 结束状态
+              if (item.correctAnswer === item.alreadyAnswer) {
+                // 并回答正确            
+                actualScore = +item.itemScore;
+              }
+            } else {          
+              if (answerSummary.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
+                actualScore = +item.itemScore;
+              }
             }
 
             bPlist.push(Object.assign({}, item, {
@@ -143,7 +186,8 @@ Page({
           pList,
           battleInfo,
           currentTab,
-          status : currentStatus  
+          status : currentStatus,
+          matchDeadLine
         })
       }
     );

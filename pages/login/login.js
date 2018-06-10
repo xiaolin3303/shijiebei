@@ -100,6 +100,7 @@ Page({
             success: function(res) {
               if(res.data.rtx){
                 wx.setStorageSync('username' , res.data.rtx);
+                wx.setStorageSync('token',res.data.token);
                 callback(true)
 
                 wx.showToast({
