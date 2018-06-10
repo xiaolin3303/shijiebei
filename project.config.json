@@ -94,6 +94,12 @@
 					"name": "冠军赛",
 					"pathName": "pages/personal/champion/champion",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "奖品",
+					"pathName": "pages/prize/prize",
+					"query": ""
 				}
 			]
 		}

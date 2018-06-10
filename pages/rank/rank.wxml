@@ -18,17 +18,17 @@
         </view>
         <view class="tab-item {{player.isMe === true ? 'myrank' : ''}}" wx:for="{{playerList}}" wx:for-index="index" wx:for-item="player" wx:key="player">
           
-          <view wx:if="{{player.rankIdx==1}}">
+          <view wx:if="{{player.rankIdx==1 && player.isMe !== true}}">
             <image  class="icon" src="/assets/icons/1.png"></image>
           </view>
-          <view wx:elif="{{player.rankIdx==2}}">
+          <view wx:elif="{{player.rankIdx==2 && player.isMe !== true}}">
             <image  class="icon" src="/assets/icons/2.png"></image>
           </view>
-          <view wx:elif="{{player.rankIdx==3}}">
+          <view wx:elif="{{player.rankIdx==3 && player.isMe !== true}}">
             <image  class="icon" src="/assets/icons/3.png"></image>
           </view>
           <view  wx:else>{{player.rankIdx}}</view> 
-          <view>{{player.user_id}}</view> 
+          <view class="text-overflow">{{player.user_id}}</view> 
           <view>{{player.score}}</view>
         </view>
 
@@ -63,7 +63,7 @@
             <image  class="icon" src="/assets/icons/3.png"></image>
           </view>
           <view wx:else>{{group.rankIdx}}</view> 
-          <view>{{group.groupName}}</view> 
+          <view class="text-overflow">{{group.groupName}}</view> 
           <view>{{group.groupScore}}</view>
         </view>
 
