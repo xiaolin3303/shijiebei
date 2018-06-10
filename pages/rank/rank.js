@@ -48,12 +48,17 @@ Page({
       }
     });
 
+    this.getGroupInfo();
+
+  },
+
+  getBattleInfo:function(){
     const battleUrl = `${Host.service}/GetBattleInfo?`;
     wx.request({
       url:battleUrl,
       method: 'get',
       data: {
-        username : token,
+        username : username,
         groupId:9283,
       },
       success: (res) => {
@@ -73,27 +78,43 @@ Page({
         // console.log(res.data.data)
       }
     })
+  },
+  getGroupInfo:function(){
 
+    const groupUrl = `${Host.service}/GetGroupInfo?`;
+    wx.request({
+      url:groupUrl,
+      method: 'get',
+      data: {
+        userId : username,
+      },
+      success: (res) => {
+        const groupName = res.data && res.data.data && res.data.data[0].groupName;
+        app.globalData.groupName = groupName;
+        this.getBattleInfo();
+      }
+    })
   },
 
   getBattleRankData: function (battleId) {
-    const groupRankurl = `${Host.service}/GetGroupRank?battleId=${battleId}`
+      const {groupName} = app.globalData;
+      const groupRankurl = `${Host.service}/GetGroupRank?battleId=${battleId}`
+      
       wx.request({
 
       url:groupRankurl,
       method : 'get',
       success: (res)=> {
-        if(res.data.ret == -102){
-            wx.showToast({  
-              title: '您没有权限，请联系管理员开通',  //标题  
-              width : 200,
-              icon: 'success',  //图标，支持"success"、"loading"  
-              mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false  
-            })  
-            return;
-        }
+        debugger
+        const rankList = res.data.rankList;
+        let myGroupRank =   rankList.filter(item => {
+            return item.groupName == groupName 
+        })
+        myGroupRank = myGroupRank.map(item => Object.assign({}, item, { isMyGroup: true }))
+        let groupList = [];
+
         this.setData({
-          groupList : res.data.rankList
+          groupList : groupList.concat(myGroupRank,rankList)
         })
       }
     });
@@ -119,26 +140,12 @@ Page({
       this.setData({
         currentBattle: battleid
       })
-      const url = `${Host.service}/GetGroupRank?battleId=${battleid}`
-      wx.request({
 
-      url,
-      method : 'get',
-      success: (res)=> {
-        if(res.data.ret == -102){
-            wx.showToast({  
-              title: '您没有权限，请联系管理员开通',  //标题  
-              width : 200,
-              icon: 'success',  //图标，支持"success"、"loading"  
-              mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false  
-            })  
-            return;
-        }
-        this.setData({
-          groupList : res.data.rankList
-        })
-      }
-    });
+      this.getBattleRankData(battleid);
 
+
+  },
+  globalData: {
+    groupName: null,
   }
 })

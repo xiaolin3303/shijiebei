@@ -1,6 +1,6 @@
 <!--components/teaminfo/teaminfo.wxml-->
 <view class="component-teaminfo">
-	<view class="group-info mt40">
+	<view class="group-info ">
 	  <view class="group-name tac">
 	      {{ teamInfo[0].groupName }}
 	  </view>

@@ -72,7 +72,7 @@ Page({
     const {teamid} = e.currentTarget.dataset;
     const data = {
         team_id : teamid,
-        user_id : token
+        user_id : username
     }
 
       wx.showModal({  

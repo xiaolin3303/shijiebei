@@ -44,7 +44,7 @@ Page({
     getData(
       url,
       {
-        user_id: token
+        user_id: username
       },
       'get',
       (res) => {
@@ -233,7 +233,7 @@ Page({
       url,
       method: 'post',
       data: {
-        user_id: token,
+        user_id: username,
         answerList: JSON.stringify(answerList)
       },
       header: {
@@ -279,7 +279,7 @@ Page({
     getData(
       url,
       {
-        username : token
+        username : username
       },
       'get',
       (res) => {

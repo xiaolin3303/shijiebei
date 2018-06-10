@@ -40,7 +40,7 @@
   <view class="tip">每个刺激战场相对独立，战队队员复活重新开赛</view>
 </view>
 
-<view class="mt40 ">
+<view class=" ">
   <teaminfo
     teamInfo="{{teamInfo}}"
   >

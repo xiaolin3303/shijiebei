@@ -1,7 +1,7 @@
 /* components/matchinfo/matchinfo.wxss */
 .match {
 	border-radius: 20rpx;
-	background: #e8eaee;
+	background: #fff;
 	padding-top: 10px;
 }
 
@@ -63,9 +63,9 @@
 	font-size : 20px;
 }
 .select-btn{
-	background:#cbcbcb;
+	background:#edeef2;
 	border-radius:26px;
-	width:70%;
+	width:100%;
 	font-size:12px;
 	margin-bottom:15px;
 	padding:15px 0px;

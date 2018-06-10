@@ -52,14 +52,14 @@
           <view>姓名</view> 
           <view>积分</view> 
         </view>
-        <view class="tab-item" wx:for="{{groupList}}" wx:for-index="index" wx:for-item="group" wx:key="group">
-          <view wx:if="{{group.rankIdx==1}}">
+        <view class="tab-item {{group.isMyGroup === true ? 'myrank' : ''}}" wx:for="{{groupList}}" wx:for-index="index" wx:for-item="group" wx:key="group">
+          <view wx:if="{{group.rankIdx==1 && group.isMyGroup !== true}}">
             <image  class="icon" src="/assets/icons/1.png"></image>
           </view>
-          <view wx:elif="{{group.rankIdx==2}}">
+          <view wx:elif="{{group.rankIdx==2 && group.isMyGroup !== true}}">
             <image  class="icon" src="/assets/icons/2.png"></image>
           </view>
-          <view wx:elif="{{group.rankIdx==3}}">
+          <view wx:elif="{{group.rankIdx==3 && group.isMyGroup !== true}}">
             <image  class="icon" src="/assets/icons/3.png"></image>
           </view>
           <view wx:else>{{group.rankIdx}}</view> 
