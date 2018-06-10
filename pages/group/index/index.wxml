@@ -13,7 +13,7 @@
       </view>
       <view class="col-auto ft35" style="color:#339a58;"  bindtap="confirmGroupName">确定</view> 
     </view>
-    <view class="groupeer-list">
+    <view class="groupeer-list" style="margin-top:30rpx">
       <view class="userinfo">
         <view class="captain">队长</view>
         <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
@@ -56,7 +56,7 @@
     <view class= "{{buttonCnt === 'invite'  || isGroupLeader && buttonCnt !== 'goanena'  && buttonCnt !== 'undergoing' ? '':'none'}}">
       <button class="invite-btn " open-type="share" bindtap="inviteFriends">
       邀请好友</button>
-      <view class=" ft11 tac mt20 wrapper-tip" style='bottom:-10rpx;'>自由组队时间将于6月14日18点整结束</view>
+      <view class=" ft11 tac wrapper-tip" style='bottom:-10rpx;'>自由组队时间将于6月14日18点整结束</view>
       <view class=" ft11 tac mb20 wrapper-tip" style='bottom:-10rpx;'>未组队成功人员系统将智能匹配</view>
     </view>
 
