@@ -9,7 +9,7 @@
     </view>
     <view class="row middle mt40">
       <view class="col">
-        <input class="name-input mr20" placeholder-class="name-inputp-tip" placeholder="为队伍起名(不超过5字符)" bindinput="createGroupName" />
+        <input class="name-input mr20 {{buttonCnt === 'invite' ? '' : 'none' }}" placeholder-class="name-inputp-tip" placeholder="为队伍起名(不超过5字符)" bindinput="createGroupName" />
       </view>
       <view class="col-auto ft35" style="color:#339a58;"  bindtap="confirmGroupName">确定</view> 
     </view>
@@ -83,8 +83,7 @@
     <view class= "{{buttonCnt === 'undergoing' ? '':'none'}}">
 
       <view
-        class="invite-btn gray-btn"
-        bindtap = "gotoAnera">
+        class="invite-btn gray-btn">
           即将开赛
       </view>
       <view class=" ft11 tac wrapper-tip">每个队员积分将累积到战队成绩，影响整体排名</view>

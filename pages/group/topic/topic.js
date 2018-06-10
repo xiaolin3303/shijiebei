@@ -12,24 +12,8 @@ Page({
     pList : [],
     bPlist :[],
     teamInfo : [],
-    tabList: [{
-      id: 1,
-      caption: '第一场',
-      status: '竞猜中',
-    }, {
-      id: 2,
-      caption: '第二场',
-      status: '竞猜中',
-    }, {
-      id: 3,
-      caption: '第三场',
-      status: '竞猜中',
-    }, {
-      id: 4,
-      caption: '第四场',
-      status: '竞猜中',
-    }],
     currentTab: 1,
+    status: -1,
     answerList : {
       'selectAnswerId': -1
     },
@@ -46,12 +30,12 @@ Page({
     this.setData({
       battleId
     })
-    this.getGroupBetList(battleId ,1);
+    this.getGroupBetList(battleId ,1,-1);
     this.getGroupInfo();
 
   },
 
-  getGroupBetList: function(battleId,roundsId){
+  getGroupBetList: function(battleId,roundsId,status){
 
     const betUrl = `${Host.service}/GetGroupBetList?`;
     getData(
@@ -143,12 +127,28 @@ Page({
           }
          
         })
+        let currentTab ;
+        let currentStatus;
+
+        
+        if(status == -1){
+
+          const currentRound = battleInfo.filter(item => {
+             return item.status == 1 ;
+          })
+          currentTab = currentRound[0].rounds;
+          currentStatus = currentRound[0].status ;
+        }else {
+          [currentTab,currentStatus] = [roundsId,status];
+        }
 
         this.setData({
           bPlist,
           matchInfo,
           pList,
-          battleInfo
+          battleInfo,
+          currentTab,
+          status : currentStatus  
         })
       }
     );
@@ -243,12 +243,7 @@ Page({
     if( status == 0){
       return 
     }
-    this.getGroupBetList(battleId,roundsid);
-
-
-    this.setData({
-      currentTab: roundsid
-    })
+    this.getGroupBetList(battleId,roundsid,status);
   },
 
   getUserInfo: function(e) {
@@ -266,6 +261,10 @@ Page({
     })
   },
   submitAnswer:function(e){
+    if(substatus == 2 ){
+      return
+    }
+
     const { matchInfo, pList, bPlist } = this.data;
     const isMatchAnswerValid = +matchInfo.selectAnswerId > -1;
     const isBplistAnswerValid = bPlist.reduce((acc, item) => {
@@ -277,7 +276,6 @@ Page({
         icon: 'none',  //图标，支持"success"、"loading"
         mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
       })
-      return
     }
 
     let answerList = [{

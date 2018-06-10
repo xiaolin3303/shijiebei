@@ -16,18 +16,18 @@
           <view>姓名</view> 
           <view>积分</view> 
         </view>
-        <view class="tab-item" wx:for="{{playerList}}" wx:for-index="index" wx:for-item="player" wx:key="player">
+        <view class="tab-item {{player.user_id == username ? 'myrank' : ''}}" wx:for="{{playerList}}" wx:for-index="index" wx:for-item="player" wx:key="player">
           
-          <view wx:if="{{index==0}}">
+          <view wx:if="{{player.rankIdx==1}}">
             <image  class="icon" src="/assets/icons/1.png"></image>
           </view>
-          <view wx:elif="{{index==1}}">
+          <view wx:elif="{{player.rankIdx==2}}">
             <image  class="icon" src="/assets/icons/2.png"></image>
           </view>
-          <view wx:elif="{{index==2}}">
+          <view wx:elif="{{player.rankIdx==3}}">
             <image  class="icon" src="/assets/icons/3.png"></image>
           </view>
-          <view wx:else>{{index + 1}}</view> 
+          <view  wx:else>{{player.rankIdx}}</view> 
           <view>{{player.user_id}}</view> 
           <view>{{player.score}}</view>
         </view>

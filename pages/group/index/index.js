@@ -20,7 +20,7 @@ Page({
     userInfo,
     groupName : '',
     groupId : null,
-    buttonCnt :"invite",
+    buttonCnt :"",
     username,
     groupLeader: '',
     isGroupLeader: '',
@@ -83,20 +83,25 @@ Page({
         
           finishCb && finishCb()
           if(!res.data){
+
+            this.setData({
+                buttonCnt : 'invite'
+              })
             return 
           }
 
-          if (res.ret == -102) {
-            wx.showToast({
-              title: '您没有权限，请联系管理员开通',  //标题  
-              width: 200,
-              icon: 'success', 
-              mask: false,  
-            })
-          }
+          // if (res.ret == -102) {
+          //   wx.showToast({
+          //     title: '您没有权限，请联系管理员开通',  //标题  
+          //     width: 200,
+          //     icon: 'success', 
+          //     mask: false,  
+          //   })
+          // }
+
 
           let teamList  = res && res.data[1];
-          let buttonCnt = ''
+          let buttonCnt = '';
 
           if(teamList.length < 4){
 
