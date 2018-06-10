@@ -67,7 +67,8 @@ Page({
           return Object.assign({}, group, { answerlist })
         });
         groupRes.forEach(group => {
-
+          let matchAnswer = group.answerlist.filter(answer => answer.answer_id === group.player_answer_id)
+          matchAnswer = matchAnswer.length ? matchAnswer[0] : null
           if (group.player_answer_id > 0) {
             // 用户之前选择过该答案
             quizres = Object.assign(quizres, {
@@ -75,12 +76,13 @@ Page({
                 answerid: group.player_answer_id,
                 forecastScore: group.ban_play === 1
                                ? (group.player_answer_id === group.win_team ? Math.floor(100 * group.answerlist.filter(answer => answer.answer_id === group.player_answer_id)[0].odd) : 0)
-                               : (Math.floor(100 * group.answerlist.filter(answer => answer.answer_id === group.player_answer_id).odd) || 0),
+                               : (Math.floor(100 * (matchAnswer ? +matchAnswer.odd : 0)) || 0),
                 closed: group.ban_play === 1
               }
             });
           }
         })
+
         const totalScore = Object.keys(quizres).reduce((acc, groupId) => {
           const quiz = quizres[groupId];
           return acc + (quiz.forecastScore && quiz.closed !== true ? quiz.forecastScore : 0)

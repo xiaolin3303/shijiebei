@@ -32,18 +32,17 @@ Page({
             return;
         };
         res.data.data = res.data.data.map((item, index) => Object.assign({}, item, {
-          rankIdx: index + 1
+          rankIdx: index + 1,
+          score : item.score/100
         }));
-        const myRank =   res.data.data.filter(item => {
+        let myRank =   res.data.data.filter(item => {
             return item.user_id == username 
         })
-        const others = res.data.data.filter(item => {
-            return item.user_id != username
-        })
+        myRank = myRank.map(item => Object.assign({}, item, { isMe: true }))
         let playerList = [];
 
         this.setData({
-          playerList : playerList.concat(myRank,others)
+          playerList : playerList.concat(myRank,res.data.data)
         })
       }
     });

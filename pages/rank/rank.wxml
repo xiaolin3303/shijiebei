@@ -16,7 +16,7 @@
           <view>姓名</view> 
           <view>积分</view> 
         </view>
-        <view class="tab-item {{player.user_id == username ? 'myrank' : ''}}" wx:for="{{playerList}}" wx:for-index="index" wx:for-item="player" wx:key="player">
+        <view class="tab-item {{player.isMe === true ? 'myrank' : ''}}" wx:for="{{playerList}}" wx:for-index="index" wx:for-item="player" wx:key="player">
           
           <view wx:if="{{player.rankIdx==1}}">
             <image  class="icon" src="/assets/icons/1.png"></image>
@@ -48,7 +48,7 @@
       <view class="list ft15">
 
         <view class="tab-item fwbold caption">
-          <view >排名</view> 
+          <view>排名</view> 
           <view>姓名</view> 
           <view>积分</view> 
         </view>
