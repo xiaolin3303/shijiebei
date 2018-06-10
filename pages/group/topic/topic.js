@@ -5,6 +5,7 @@ const app = getApp();
 const Host = require("../../../config/host.config"); 
 const username = wx.getStorageSync('username');
 const getData = require("../../../model/dataModel");
+const token = wx.getStorageSync('token');
 //const username ="carlsonlin"
 
 Page({
@@ -48,8 +49,19 @@ Page({
       },
       'get',
       (res) => {
-        const blist  = res.data.bList;     
+        const blist  = res.data.bList;
+        // blist[0].alreadyAnswer = 0;
+        // blist[0].alreadyAnswer = -1;
+        // blist[0].correctAnswer = -1;
+
+        // blist[1].alreadyAnswer = 0;
+        // blist[1].alreadyAnswer = 1;
+        // blist[1].correctAnswer = -1;
         const battleInfo = res.data.battleInfo;
+
+        // res.data.qList[0].alreadyAnswer = 0;
+        // res.data.qList[0].alreadyAnswer = 1;
+        // res.data.qList[0].correctAnswer = -1;
 
         const pList = res.data.qList.map(item => {
           let answerSummary = Object.keys(item.answerSummary).map(key => ({
@@ -57,8 +69,17 @@ Page({
             value: item.answerSummary[key]
           }))
           let actualScore = 0;
-          if (answerSummary.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
-            actualScore = +item.itemScore;
+          let matchAnswer = item.alreadyAnswer
+          if (item.correctAnswer > -1) {
+            // 结束状态
+            if (item.correctAnswer === item.alreadyAnswer) {
+              // 并回答正确            
+              actualScore = +item.itemScore;
+            }
+          } else {          
+            if (answerSummary.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
+              actualScore = +item.itemScore;
+            }
           }
           return Object.assign({}, item, {
             selectAnswerId: item.alreadyAnswer,
@@ -96,10 +117,18 @@ Page({
                 actualScore: 0,
                 itemScore: item.score
             }
-
-            if (answerlist.filter(answer => answer.answer_id === matchInfo.selectAnswerId).length) {
-              matchInfo.actualScore = item.score
+            if (item.correctAnswer > -1) {
+              // 结束状态
+              if (item.correctAnswer === item.alreadyAnswer) {
+                // 并回答正确            
+                matchInfo.actualScore = +item.score;
+              }
+            } else {          
+              if (answerlist.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
+                matchInfo.actualScore = +item.score;
+              }
             }
+
           }else if (item.isBet == 0 ){
 
             let answerSummary  = Object.keys(item.answerSummary).map(key => ({
@@ -107,8 +136,16 @@ Page({
               value: item.answerSummary[key]
             }))
             let actualScore = 0;
-            if (answerSummary.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
-              actualScore = +item.itemScore;
+            if (item.correctAnswer > -1) {
+              // 结束状态
+              if (item.correctAnswer === item.alreadyAnswer) {
+                // 并回答正确            
+                actualScore = +item.itemScore;
+              }
+            } else {          
+              if (answerSummary.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
+                actualScore = +item.itemScore;
+              }
             }
 
             bPlist.push(Object.assign({}, item, {

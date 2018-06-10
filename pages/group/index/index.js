@@ -9,6 +9,7 @@ const username = wx.getStorageSync('username');
 const userInfo = wx.getStorageSync('userInfo');
 const getData = require("../../../model/dataModel");
 const sepcTime = require("../../../config/specTimeConfig");
+const token = wx.getStorageSync('token');
 
 Page({
   data: {

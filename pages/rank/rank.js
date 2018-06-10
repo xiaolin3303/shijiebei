@@ -5,6 +5,7 @@ const app = getApp();
 const rankData  = require("../../test/rankData");
 const Host = require("../../config/host.config");
 const username = wx.getStorageSync('username');
+const token = wx.getStorageSync('token');
 
 Page({
   data: {
@@ -52,7 +53,7 @@ Page({
       url:battleUrl,
       method: 'get',
       data: {
-        username,
+        username : token,
         groupId:9283,
       },
       success: (res) => {

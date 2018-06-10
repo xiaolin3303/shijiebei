@@ -8,6 +8,7 @@ const championList  = require("../../../test/championList");
 const sepcTime = require("../../../config/specTimeConfig");
 const Host = require("../../../config/host.config");
 const username = wx.getStorageSync('username');
+const token = wx.getStorageSync('token');
 
 Page({
 
@@ -43,7 +44,7 @@ Page({
     getData(
       url,
       {
-        user_id: username || 'viinyxu'
+        user_id: token
       },
       'get',
       (res) => {
@@ -232,7 +233,7 @@ Page({
       url,
       method: 'post',
       data: {
-        user_id: username || 'viinyxu',
+        user_id: token,
         answerList: JSON.stringify(answerList)
       },
       header: {
@@ -278,7 +279,7 @@ Page({
     getData(
       url,
       {
-        username
+        username : token
       },
       'get',
       (res) => {

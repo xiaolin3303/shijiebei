@@ -27,7 +27,7 @@
 	  <view class="tip-msg">
 	    竞猜截止时间：{{group.deadline}}
 	  </view>
-	  <view class="forecast-score">预计得分:{{forecastScore || 0}}</view>
+	  <view class="forecast-score">{{disabled === true ? '实际得分' : '预计得分'}}:{{forecastScore || 0}}</view>
 	</view>
 </view>
 
