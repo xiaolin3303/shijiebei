@@ -12,24 +12,29 @@
 
         <view class="list ft15">
         <view class="tab-item fwbold caption">
-          <view>排名</view> 
-          <view>姓名</view> 
-          <view>积分</view> 
+          <view class="item" style="width:20%">排名</view> 
+          <view class="item" style="width:40%">姓名</view> 
+          <view class="item">积分</view> 
         </view>
         <view class="tab-item {{player.isMe === true ? 'myrank' : ''}}" wx:for="{{playerList}}" wx:for-index="index" wx:for-item="player" wx:key="player">
           
-          <view wx:if="{{player.rankIdx==1 && player.isMe !== true}}">
+          <view class="item" style="width:20%" wx:if="{{player.rankIdx==1 && player.isMe !== true}}">
             <image  class="icon" src="/assets/icons/1.png"></image>
           </view>
-          <view wx:elif="{{player.rankIdx==2 && player.isMe !== true}}">
+          <view class="item" style="width:20%" wx:elif="{{player.rankIdx==2 && player.isMe !== true}}">
             <image  class="icon" src="/assets/icons/2.png"></image>
           </view>
-          <view wx:elif="{{player.rankIdx==3 && player.isMe !== true}}">
+          <view class="item" style="width:20%" wx:elif="{{player.rankIdx==3 && player.isMe !== true}}">
             <image  class="icon" src="/assets/icons/3.png"></image>
           </view>
-          <view  wx:else>{{player.rankIdx}}</view> 
-          <view class="text-overflow">{{player.user_id}}</view> 
-          <view>{{player.score}}</view>
+          <view class="item" style="width:20%"  wx:else>{{player.rankIdx}}</view> 
+          <view class="item" style="width:40%">
+            <view class="row middle">
+              <image class="icon avatar col-auto mr10" src="{{player.avatar}}"></image>
+              <view class="col text-overflow">{{player.user_id}}</view>
+            </view>
+          </view> 
+          <view class="item">{{player.score}}</view>
         </view>
 
       </view>
@@ -48,23 +53,24 @@
       <view class="list ft15">
 
         <view class="tab-item fwbold caption">
-          <view>排名</view> 
-          <view>姓名</view> 
-          <view>积分</view> 
+          <view class="item">排名</view> 
+          <view class="item">姓名</view> 
+          <view class="item">积分</view> 
         </view>
         <view class="tab-item {{group.isMyGroup === true ? 'myrank' : ''}}" wx:for="{{groupList}}" wx:for-index="index" wx:for-item="group" wx:key="group">
-          <view wx:if="{{group.rankIdx==1 && group.isMyGroup !== true}}">
+          <view class="item" wx:if="{{group.rankIdx==1 && group.isMyGroup !== true}}">
             <image  class="icon" src="/assets/icons/1.png"></image>
           </view>
-          <view wx:elif="{{group.rankIdx==2 && group.isMyGroup !== true}}">
+          <view class="item" wx:elif="{{group.rankIdx==2 && group.isMyGroup !== true}}">
             <image  class="icon" src="/assets/icons/2.png"></image>
           </view>
-          <view wx:elif="{{group.rankIdx==3 && group.isMyGroup !== true}}">
+          <view class="item" wx:elif="{{group.rankIdx==3 && group.isMyGroup !== true}}">
+
             <image  class="icon" src="/assets/icons/3.png"></image>
           </view>
-          <view wx:else>{{group.rankIdx}}</view> 
-          <view class="text-overflow">{{group.groupName}}</view> 
-          <view>{{group.groupScore}}</view>
+          <view class="item" wx:else>{{group.rankIdx}}</view> 
+          <view class="text-overflow item">{{group.groupName}}</view> 
+          <view class="item">{{group.groupScore}}</view>
         </view>
 
       </view>

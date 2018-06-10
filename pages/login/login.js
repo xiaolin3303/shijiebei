@@ -1,4 +1,6 @@
 // pages/login/login.js
+const Host = require("../../config/host.config");
+
 Page({
 
   /**
@@ -64,18 +66,51 @@ Page({
   
   },
 
-  getUserInfo: function(e) {
-    wx.setStorageSync('userInfo' , e.detail.userInfo);
-    this.login(success => {
-      if (success) {
-        const routes = getCurrentPages();
-        if (routes.length > 1) {
-          wx.navigateBack({ delta: 1 })          
+  uploadAvatar: function (username, avatar, callback) {
+    const url = `${Host.service}/InsertUser`;
+    wx.request({
+      url,
+      method: 'get',
+      data: {
+        user_id: username,
+        avatar
+      },
+      success: (res) => {
+        if (res.data.ret === 0) {
+          callback(true)
         } else {
-          wx.redirectTo({
-            url: '/pages/main/main'
-          })
+          callback(false)
         }
+      },
+      fail: () => {
+        callback(false)
+      }
+    });
+  },
+
+  getUserInfo: function(e) {
+    const { userInfo } = e.detail;
+    wx.setStorageSync('userInfo' , userInfo);
+    this.login((success, username) => {
+      if (success) {
+        this.uploadAvatar(username, userInfo.avatarUrl, (success) => {
+          if (success) {
+            const routes = getCurrentPages();
+            if (routes.length > 1) {
+              wx.navigateBack({ delta: 1 })          
+            } else {
+              wx.redirectTo({
+                url: '/pages/main/main'
+              })
+            }
+          } else {
+            wx.showToast({  
+              title: '登录失败',  
+              icon: 'success',   
+              mask: false,   
+            })
+          }
+        });
       } else {
         wx.showToast({  
           title: '登录失败',  
@@ -101,7 +136,7 @@ Page({
               if(res.data.rtx){
                 wx.setStorageSync('username' , res.data.rtx);
                 wx.setStorageSync('token',res.data.token);
-                callback(true)
+                callback(true, res.data.rtx)
 
                 wx.showToast({
                   title: res.data.rtx,  //标题
