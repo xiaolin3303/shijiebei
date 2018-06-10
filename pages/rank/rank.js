@@ -34,9 +34,10 @@ Page({
         };
         res.data.data = res.data.data.map((item, index) => Object.assign({}, item, {
           rankIdx: index + 1,
-          score : item.score/100
+          score : item.score/100,
+          avatar: item.avatar
         }));
-        let myRank =   res.data.data.filter(item => {
+        let myRank = res.data.data.filter(item => {
             return item.user_id == username 
         })
         myRank = myRank.map(item => Object.assign({}, item, { isMe: true }))
