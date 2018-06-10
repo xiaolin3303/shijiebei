@@ -1,8 +1,7 @@
 <!--components/matchinfo/matchinfo.wxml-->
 <view class="match component-matchinfo">
-	<view class="box">
-	  <view class="item-group"> {{group.group_id}}</view>
-	  <image class="subscript" src="/assets/icons/jiaobiao.png"></image>
+	<view class="item-group">{{group.group_id}}组</view>
+	<view class="box" style="padding: 0 50rpx">
 	  <view class="item">
 	    <view class="country">{{group.team_name1}}</view>
 	  </view>

@@ -54,7 +54,7 @@
 
         <view class="tab-item fwbold caption">
           <view class="item">排名</view> 
-          <view class="item">姓名</view> 
+          <view class="item">队名</view> 
           <view class="item">积分</view> 
         </view>
         <view class="tab-item {{group.isMyGroup === true ? 'myrank' : ''}}" wx:for="{{groupList}}" wx:for-index="index" wx:for-item="group" wx:key="group">
