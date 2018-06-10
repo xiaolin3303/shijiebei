@@ -59,8 +59,7 @@ Page({
       url:battleUrl,
       method: 'get',
       data: {
-        username : username,
-        groupId:9283,
+        userId : username,
       },
       success: (res) => {
         this.getBattleRankData(res.data.data[0].battle_id)

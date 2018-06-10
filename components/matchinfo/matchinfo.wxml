@@ -17,7 +17,7 @@
 	</view>
 	<view class="box" style="padding: 0 50rpx">
 	  <view class="item" style="box-sizing:border-box;padding: 0 20rpx" wx:for="{{group.answerlist}}" wx:for-index="i" wx:for-item="answer" wx:key="answer">
-	    <view class="frist-victory select-btn {{answerId === answer.answer_id ? 'res-active' : ''}} {{group.correctAnswer === answer.answer_id ? 'correct-answer' : ''}} {{group.selectAnswerId === answer.answer_id ? 'user-answer' : ''}} {{disabled !== true ? 'open' : ''}}" data-disabled="{{disabled === true ? 'true' : 'false'}}" bindtap="_selectAnswer" data-answer_id="{{answer.answer_id}}">
+	    <view class="frist-victory ft35 select-btn {{answerId === answer.answer_id ? 'res-active' : ''}} {{group.correctAnswer === answer.answer_id ? 'correct-answer' : ''}} {{group.selectAnswerId === answer.answer_id ? 'user-answer' : ''}} {{disabled !== true ? 'open' : ''}}" data-disabled="{{disabled === true ? 'true' : 'false'}}" bindtap="_selectAnswer" data-answer_id="{{answer.answer_id}}">
 	      <view>{{answer.answe_describe}}</view>
 	      <view>{{answer.odd}}</view>
 	    </view>

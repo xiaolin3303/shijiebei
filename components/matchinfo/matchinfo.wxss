@@ -8,7 +8,7 @@
 .match .box {
 	display: flex;
 	flex-direction: row;
-	font-size:14px;
+	font-size:35rpx;
 	text-align:center;
 
 }
@@ -23,15 +23,21 @@
 	justify-content: center;
 	display:flex;
 }
-
+.match .box .item:nth-child(3) {
+	position:relative;
+	left:-20rpx;	
+}
 .match .box .item .country {
 	height: 31px;
-	font-size: 14px;
+	font-size: 35rpx;
 }
 
 .icon.vs {
 	width: 26px;
 	height: 20px;
+	position:relative;
+left:-20rpx;
+
 }
 .icon.national-flag{
 	width:20px;
@@ -60,13 +66,13 @@
 	font-size: 12px;
 }
 .country{
-	font-size : 20px;
+	font-size : 35rpx;
 }
 .select-btn{
 	background:#edeef2;
 	border-radius:26px;
 	width:100%;
-	font-size:12px;
+	font-size:30rpx;
 	margin-bottom:15px;
 	padding:15px 0px;
 }
@@ -89,11 +95,11 @@
 	height:32px;
 	background: #339a58;
 	width:16px;
-	font-size:25rpx;
+	font-size:35rpx;
 	color:#fff;
 }
 .item-bottom{
-	background : #cbcbcb;
+	background : #edeef2;
 	position:relative;
 	bottom : 0px;
 	padding : 5px 0px ;

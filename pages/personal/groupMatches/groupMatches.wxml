@@ -57,11 +57,11 @@
           </view>
         </view>
         <block wx:if="banGroupList.length > 1">
-        <view class="mt20 tac ft14 fcwhite" style="padding-bottom:30rpx" wx:if="{{showMoreBanGroup === false}}" bindtap="showMoreBanGroup">
+        <view class="mt20 tac ft11 fcwhite" style="padding-bottom:30rpx" wx:if="{{showMoreBanGroup === false}}" bindtap="showMoreBanGroup">
           查看更多
           <image class="icon" src="/assets/down-arrow.png" style="width:30rpx;height:30rpx"></image>
         </view>
-        <view class="mt20 tac ft14 fcwhite" style="padding-bottom:30rpx" wx:else bindtap="hideBanGroup">
+        <view class="mt20 tac ft11 fcwhite" style="padding-bottom:30rpx" wx:else bindtap="hideBanGroup">
           收起
           <image class="icon" src="/assets/up-arrow.png" style="width:30rpx;height:30rpx"></image>          
         </view>
@@ -77,7 +77,6 @@
             <view>{{group.group_id}}</view>
             <view>组</view>
           </view>
-          <image class="subscript" src="/assets/icons/jiaobiao.png"></image>
           <view class="item" style="justify-content: flex-start; padding-left: 20rpx">
             <view class="country">
               <text>{{group.team_name1}}</text>

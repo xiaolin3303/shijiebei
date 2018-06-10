@@ -45,8 +45,8 @@ Page({
         res.data = res.data.map(battle => {
 
           const { begin_time, deadline } = battle
-          let startDate = new Date(begin_time);
-          let endDate = new Date(deadline);
+          let startDate = new Date(+begin_time * 1000);
+          let endDate = new Date(+deadline*1000);
           let displayEndTime = `${endDate.getFullYear()}/${endDate.getMonth()+1}/${endDate.getDate()}`;
           let displayStartEndTime = `${startDate.getFullYear()}/${startDate.getMonth()+1}/${startDate.getDate()}-${endDate.getMonth()+1}/${endDate.getDate()}`;
         
