@@ -12,7 +12,7 @@
           </text>
         </view>
         
-        <image src="{{battle.status == 1 ? battle.picture : battle.grayPicture}}" class="mt5 caption-figure {{battle.status == 1 ? 'active' : ''}} {{battle.status == 0 ? 'gray-icon' : '' }}  {{battle.status !== 2 ? 'middle' : ''}}"></image>
+        <image src="{{battle.status == 1 ? battle.picture : battle.grayPicture}}" class="mt5 caption-figure {{battle.status == 1 ? 'active' : ''}} {{battle.status == 0 || battle.status == 2? 'gray-icon' : '' }}  {{battle.status !== 2 ? 'middle' : ''}}"></image>
         <view class="row ft20 {{battle.status == 2 ?  '' : 'none'}}">
           <view class="col">
               <view class="tac">队伍积分</view>
