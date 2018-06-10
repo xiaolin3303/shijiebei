@@ -8,17 +8,18 @@ const username = wx.getStorageSync('username');
 
 Page({
   data: {
-    currentTab: 1,
+    currentTab: 0,
     playerList : [],
     groupList : [],
     battleList : [],
-    currentBattle: null
+    currentBattle: null,
+    username
   },
   onLoad:function(e) {
 
     wx.request({
 
-      url: 'https://yybopworldcup2018147.sparta.html5.qq.com/ajax/GetPlayerList?username=lynasliu',
+      url: 'https://yybopworldcup2018147.sparta.html5.qq.com/ajax/GetPlayerList',
       method : 'get',
       success: (res)=> {
         if(res.data.ret == -102){
@@ -29,9 +30,20 @@ Page({
               mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false  
             })  
             return;
-        }
+        };
+        res.data.data = res.data.data.map((item, index) => Object.assign({}, item, {
+          rankIdx: index + 1
+        }));
+        const myRank =   res.data.data.filter(item => {
+            return item.user_id == username 
+        })
+        const others = res.data.data.filter(item => {
+            return item.user_id != username
+        })
+        let playerList = [];
+
         this.setData({
-          playerList : res.data.data
+          playerList : playerList.concat(myRank,others)
         })
       }
     });

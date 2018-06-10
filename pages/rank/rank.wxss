@@ -10,8 +10,9 @@
 .tab-item.caption {
   border-top-right-radius: 10rpx;
   border-top-left-radius: 10rpx;
-  background: #eee;
-  box-shadow: 0 2rpx 3rpx rgba(0, 0, 0, .4);
+}
+.myrank{
+  background : #eee;
 }
 .tab-item view {
   width:28%;

@@ -6,7 +6,7 @@
   >
   </navtab>
 
-  <view class = "{{result.win_team_id  ? 'none' : '' }}" style="margin-top:46px;">
+  <view class = "{{result.win_team_id  ? 'none' : '' }}" style="margin-top:92rpx;">
     <view class='deadline' style="padding-top :15px;font-size:15px;">投票截止时间：2018/06/14 18:00</view>
       <view class="champion-match-list">
         <view class="champion-match {{ selectChampion === champion.team_id ? 'selected' : ''}}" wx:for="{{championData}}" wx:for-index="i" wx:for-item="champion" wx:key="champion" data-championid="{{champion.team_id}}" >
@@ -33,13 +33,13 @@
   </view>
 
   <view class = "champion-wrapper {{result.win_team_id ? '' : 'none' }}">
-    <view class="result-wrap">
+    <view class="result-wrap" style="margin-top:92rpx;">
       <image class="result-background" src="{{result.win_team_id === result.answer_team_id?'/assets/guess-right.png':'/assets/guess-error.png'}}"></image>
       <view class="result-center">
 
         <view class="result-inner">
-          <view class="result-custom">您猜的冠军是：{{result.answer_team_name}}</view>
-          <view class="result-real {{result.win_team_id === result.answer_team_id ?'':'is-wrong'}}">
+          <view class="result-custom ft11">您猜的冠军是：{{result.answer_team_name}}</view>
+          <view class="result-real  ft15 {{result.win_team_id === result.answer_team_id ?'':'is-wrong'}}">
             <view>冠军：</view>
             <view class="result-name">{{result.win_team_name}}</view>
             <image class="result-image" src="{{result.win_team_url}}"></image>

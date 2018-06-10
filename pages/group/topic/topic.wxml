@@ -5,7 +5,7 @@
       <image wx:if="{{battle.rounds === currentTab}}" src="/assets/icons/arrow-active.png" class="arrow"></image>
       <image wx:else src="/assets/icons/arrow.png" class="arrow"></image>              
       <view class="mt20 ft17 ml35">第{{battle.rounds}}场</view>
-      <view class="ft11 ml35 {{battle.status == 0? 'start-text' : ''}}">{{battle.status == 0 ? '即将开放' : (tab.status == 1 ? '竞猜中' : '已结束')}}</view>
+      <view class="ft11 ml35 {{battle.status == 0? 'start-text' : ''}}">{{battle.status == 0 ? '即将开放' : (battle.status == 1 ? '竞猜中' : '已结束')}}</view>
     </view>
   </view>
   <view class="tip " style="font-size:30rpx">以下为淘汰题，答对继续积分，答错则无法继续闯关</view>
@@ -34,7 +34,7 @@
 
   </view>
 
-  <view class="tip" style="font-size:30rpx">以下为积分题，答对累计积分，答错则无法继续闯关</view>
+  <view class="tip" style="font-size:30rpx">以下为积分题，答对累计积分，答错不扣分</view>
   <view class="topic-list">
     <view class="topic-item ft30 mt30" wx:for="{{pList}}" wx:for-index="index" wx:for-item="list" wx:key="list">
       <view class="wrapper">
@@ -48,9 +48,10 @@
       <view class="mt30 tip">预计得分:10</view>
     </view>
   </view>
-  <view class="tac mt40" wx:if="{{isAlive}}">
-    <view class="submit-btn" bindtap="submitAnswer">提交答案</view>
+  <view class="tac mt40" >
+    <view class="submit-btn {{!isAlive || status == 2 ? 'gray-btn' : ''}}" data-substatus="{{status}}" bindtap="submitAnswer">提交答案</view>
   </view>
+
   <view class="mt40 fixed">
     <teaminfo
       teamInfo="{{teamInfo}}"

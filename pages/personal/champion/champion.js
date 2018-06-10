@@ -73,38 +73,53 @@ Page({
         team_id : teamid,
         user_id : username
     }
-    const url = `${Host.service}/InsertChampion`;
 
-    wx.request({
+      wx.showModal({  
+        title: '提示',  //标题  
+        content:'是否确认选择该国家为冠军队',
+        showCancel: false,
+        success: (res) =>{
 
-      url,
-      method : 'post',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      data,
-      success: (res)=> {
-        if(res.data.ret === 0){
-          this.setData({
-            selectChampion: teamid
+          if(res.confirm){
+          const url = `${Host.service}/InsertChampion`;
+
+          wx.request({
+
+            url,
+            method : 'post',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            data,
+            success: (res)=> {
+              if(res.data.ret === 0){
+                this.setData({
+                  selectChampion: teamid
+                })
+                wx.showToast({
+                  title: '成功',  //标题
+                  icon: 'success',  //图标，支持"success"、"loading"
+                  mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
+                })
+                wx.redirectTo({
+                  url: 'pages/personal/champion/champion'
+                })
+              }else{
+                  wx.showToast({
+                    title: res.data.msg || '投票失败',  //标题
+                    icon: 'none',  //图标，支持"success"、"loading"
+                    mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
+                  })
+              }
+            }
           })
-          wx.showToast({
-            title: '成功',  //标题
-            icon: 'success',  //图标，支持"success"、"loading"
-            mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
-          })
-          wx.redirectTo({
-            url: 'pages/personal/champion/champion'
-          })
-        }else{
-            wx.showToast({
-              title: res.data.msg || '投票失败',  //标题
-              icon: 'none',  //图标，支持"success"、"loading"
-              mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
-            })
-        }
-      }
-    })
+          }
+
+
+
+        }    
+      }) 
+
 
   }
 

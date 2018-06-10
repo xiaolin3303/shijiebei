@@ -168,3 +168,6 @@
 .start-text{
 	color : #ffc725 ;
 }
+.gray-btn{
+	background : #adadad;
+}
