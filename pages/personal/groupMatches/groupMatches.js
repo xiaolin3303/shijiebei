@@ -155,11 +155,13 @@ Page({
     });
   },
   hideBanGroup: function () {
-    console.log([this.data.lastBanGroup])
     this.setData({
       displayBanGroup: [this.data.lastBanGroup],
       showMoreBanGroup: false
     });
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
   },
   clearSelect:function(e){
 
