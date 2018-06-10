@@ -93,7 +93,11 @@
   </view>
 
   <view class="ft11 tac bottom-tip">6月14日前完成组队，6月15日开始进入战场</view>
+
+  
 </view>
+
+<image wx:if="{{showGoHomeNavi}}" class="icon home-icon" src="/assets/icons/home.png" bindtap="goHome"></image>
 
 <view class="tip-cover {{hasCover ? '' : 'none'}}"  bindtap="hideCover">
   <view class="tip-content">

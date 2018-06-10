@@ -13,7 +13,7 @@
       <matchinfo
         group="{{matchInfo}}"
         answerId="{{matchInfo.selectAnswerId}}"
-        forecastScore="{{10}}"
+        forecastScore="{{matchInfo.actualScore}}"
         disabled="{{matchInfo.correctAnswer !== -1}}"
         bind:selectAnswer="selectMatchAnswer"
       >
@@ -23,12 +23,13 @@
         <view class="wrapper">
           <view class="topic ft35">{{index+1}}.{{list.itemDescribe}}</view>
           <view class="answer-list row mt20">
-            <view class="option col {{list.correctAnswer === -1 ? 'open' : ''}}" wx:for="{{list.answerSummary}}" wx:for-index="i" wx:for-item="answer" wx:key="answer" bindtap="selectPList" data-answer_id="{{answer.answer_id}}" data-item_id="{{list.itemId}}" data-disabled="{{list.correctAnswer !== -1 ? 'true' : 'false'}}">
+            <view class="option col {{list.correctAnswer === -1 ? 'open' : ''}}" wx:for="{{list.answerSummary}}" wx:for-index="i" wx:for-item="answer" wx:key="answer" bindtap="selectBPList" data-answer_id="{{answer.answer_id}}" data-item_id="{{list.itemId}}" data-disabled="{{list.correctAnswer !== -1 ? 'true' : 'false'}}" data-score="{{list.itemScore}}">
               <view class="answer-item {{ (answer.answer_id === list.selectAnswerId )  ? 'selected' : ''}} {{list.correctAnswer === answer.answer_id ? 'correct-answer' : ''}} {{list.selectAnswerId === answer.answer_id ? 'user-answer' : ''}}">{{answer.value}}</view>
             </view>
           </view>
         </view>
-        <view class="mt30 tip">预计得分:10</view>
+        <view wx:if="{{list.correctAnswer !== -1}}" class="mt30 tip">实际得分:{{list.actualScore}}</view>
+        <view wx:else class="mt30 tip">预计得分:{{list.actualScore}}</view>
       </view>
     </view>  
 
@@ -40,12 +41,13 @@
       <view class="wrapper">
         <view class="topic ft35">{{index+1}}.{{list.itemDescribe}}</view>
         <view class="answer-list row mt20">
-          <view class="option col {{list.correctAnswer === -1 ? 'open' : ''}}" wx:for="{{list.answerSummary}}" wx:for-index="i" wx:for-item="answer" wx:key="answer" bindtap="selectPList" data-answer_id="{{answer.answer_id}}" data-item_id="{{list.itemId}}" data-disabled="{{list.correctAnswer !== -1 ? 'true' : 'false'}}">
+          <view class="option col {{list.correctAnswer === -1 ? 'open' : ''}}" wx:for="{{list.answerSummary}}" wx:for-index="i" wx:for-item="answer" wx:key="answer" bindtap="selectPList" data-answer_id="{{answer.answer_id}}" data-item_id="{{list.itemId}}" data-disabled="{{list.correctAnswer !== -1 ? 'true' : 'false'}}" data-score="{{list.itemScore}}">
             <view class="answer-item {{ (answer.answer_id === list.selectAnswerId )  ? 'selected' : ''}} {{list.correctAnswer === answer.answer_id ? 'correct-answer' : ''}} {{list.selectAnswerId === answer.answer_id ? 'user-answer' : ''}}">{{answer.value}}</view>
           </view>
         </view>
       </view>
-      <view class="mt30 tip">预计得分:10</view>
+      <view wx:if="{{list.correctAnswer !== -1}}" class="mt30 tip">实际得分:{{list.actualScore}}</view>
+      <view wx:else class="mt30 tip">预计得分:{{list.actualScore}}</view>
     </view>
   </view>
   <view class="tac mt40" >

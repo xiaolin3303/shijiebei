@@ -12,6 +12,7 @@ const sepcTime = require("../../../config/specTimeConfig");
 
 Page({
   data: {
+    showGoHomeNavi: false,
     inputValue : '',
     hasCover : false,
     teamList: [],
@@ -47,6 +48,13 @@ Page({
   onLoad: function (opt) {
     const { groupId,groupName } = opt
     this.getGroupInfo(groupId,groupName);
+
+    const routes = getCurrentPages();
+    if (routes.length === 1) {
+      this.setData({
+        showGoHomeNavi: true
+      })
+    }
   },
 
   onPullDownRefresh: function (e) {
@@ -273,6 +281,12 @@ Page({
   gotoStruction: function(e){
     wx.navigateTo({
       url: '../../instruction/instruction'
+    })
+  },
+
+  goHome: function (e) {
+    wx.redirectTo({
+      url: '/pages/main/main'
     })
   }
 })

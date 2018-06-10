@@ -17,7 +17,7 @@
 	</view>
 	<view class="box" >
 	  <view class="item" wx:for="{{group.answerlist}}" wx:for-index="i" wx:for-item="answer" wx:key="answer">
-	    <view class="frist-victory select-btn {{answerId === answer.answer_id ? 'res-active' : ''}} {{group.correctAnswer === answer.answer_id ? 'correct-answer' : ''}} {{group.selectAnswerId === answer.answer_id ? 'user-answer' : ''}}" data-disabled="{{disabled === true ? 'true' : 'false'}}" bindtap="_selectAnswer" data-answer_id="{{answer.answer_id}}">
+	    <view class="frist-victory select-btn {{answerId === answer.answer_id ? 'res-active' : ''}} {{group.correctAnswer === answer.answer_id ? 'correct-answer' : ''}} {{group.selectAnswerId === answer.answer_id ? 'user-answer' : ''}} {{disabled !== true ? 'open' : ''}}" data-disabled="{{disabled === true ? 'true' : 'false'}}" bindtap="_selectAnswer" data-answer_id="{{answer.answer_id}}">
 	      <view>{{answer.answe_describe}}</view>
 	      <view>{{answer.odd}}</view>
 	    </view>
@@ -25,9 +25,9 @@
 	</view>
 	<view class="item-bottom">
 	  <view class="tip-msg">
-	    竞猜截止时间：6月12日 23:52
+	    竞猜截止时间：{{group.deadline}}
 	  </view>
-	  <view class="forecast-score">预计得分:{{forecastScore || '-'}}</view>
+	  <view class="forecast-score">预计得分:{{forecastScore || 0}}</view>
 	</view>
 </view>
 

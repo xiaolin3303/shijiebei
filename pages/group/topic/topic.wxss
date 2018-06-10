@@ -1,4 +1,6 @@
 .topic-wrapper{
+	width: 100%;
+	overflow-x: hidden;
 	background : #21653c;
 	padding-bottom:500rpx;
 }

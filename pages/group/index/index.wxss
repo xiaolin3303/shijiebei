@@ -12,6 +12,14 @@
 
 }	
 
+.home-icon {
+	width: 40rpx;
+	height: 40rpx;
+	position: absolute;
+	left: 30rpx;
+	top: 35rpx;
+}
+
 .create-name-wrapper {
 	position:absolute;
 	width:690rpx;

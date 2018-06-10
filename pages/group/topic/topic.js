@@ -3,7 +3,7 @@
 //获取应用实例
 const app = getApp();
 const Host = require("../../../config/host.config"); 
-const username =   '';
+const username = wx.getStorageSync('username');
 const getData = require("../../../model/dataModel");
 
 Page({
@@ -48,15 +48,30 @@ Page({
       'get',
       (res) => {
         const blist  = res.data.bList;
+        
+        // blist[0].correctAnswer = -1;
+        // blist[0].alreadyAnswer = 0;
+        // blist[1].correctAnswer = -1;
+        // blist[1].alreadyAnswer = 0;
+
         const battleInfo = res.data.battleInfo;
+
+        // res.data.qList[0].correctAnswer = -1;
+        // res.data.qList[0].alreadyAnswer = 0;
+
         const pList = res.data.qList.map(item => {
           let answerSummary = Object.keys(item.answerSummary).map(key => ({
             answer_id: +key,
             value: item.answerSummary[key]
           }))
+          let actualScore = 0;
+          if (answerSummary.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
+            actualScore = +item.itemScore;
+          }
           return Object.assign({}, item, {
             selectAnswerId: item.alreadyAnswer,
-            answerSummary
+            answerSummary,
+            actualScore
           })
         });
 
@@ -85,7 +100,13 @@ Page({
                 team_name2 : item.team2,
                 group_id : item.scheduleGroup,
                 selectAnswerId: item.alreadyAnswer,
-                correctAnswer: item.correctAnswer
+                correctAnswer: item.correctAnswer,
+                actualScore: 0,
+                itemScore: item.score
+            }
+
+            if (answerlist.filter(answer => answer.answer_id === matchInfo.selectAnswerId).length) {
+              matchInfo.actualScore = item.score
             }
           }else if (item.isBet == 0 ){
 
@@ -93,9 +114,15 @@ Page({
               answer_id: +key,
               value: item.answerSummary[key]
             }))
+            let actualScore = 0;
+            if (answerSummary.filter(answer => answer.answer_id === item.alreadyAnswer).length) {
+              actualScore = +item.itemScore;
+            }
+
             bPlist.push(Object.assign({}, item, {
               selectAnswerId: item.alreadyAnswer,
-              answerSummary
+              answerSummary,
+              actualScore
             }))
           }
          
@@ -115,7 +142,6 @@ Page({
           [currentTab,currentStatus] = [roundsId,status];
         }
 
-        debugger
         this.setData({
           bPlist,
           matchInfo,
@@ -164,21 +190,42 @@ Page({
   selectMatchAnswer: function (e) {
     const { answer_id } = e.detail;
     let matchInfo = Object.assign({}, this.data.matchInfo, {
-      selectAnswerId: answer_id
-    })
+      selectAnswerId: answer_id,
+      actualScore: this.data.matchInfo.itemScore
+    });
 
     this.setData({ matchInfo })
   },
 
+  selectBPList: function (e) {
+    const { answer_id, item_id, disabled, score } = e.currentTarget.dataset;
+    if (disabled === 'true') {
+      return
+    }
+    let bPlist = this.data.bPlist.map(item => {
+      if (item.itemId === item_id) {
+        return Object.assign({}, item, {
+          selectAnswerId: +answer_id,
+          actualScore: +score
+        })
+      } else {
+        return item
+      }
+    })
+
+    this.setData({ bPlist })
+  },
+
   selectPList: function (e) {
-    const { answer_id, item_id, disabled } = e.currentTarget.dataset;
+    const { answer_id, item_id, disabled, score } = e.currentTarget.dataset;
     if (disabled === 'true') {
       return
     }
     let pList = this.data.pList.map(item => {
       if (item.itemId === item_id) {
         return Object.assign({}, item, {
-          selectAnswerId: +answer_id
+          selectAnswerId: +answer_id,
+          actualScore: +score
         })
       } else {
         return item
@@ -214,27 +261,36 @@ Page({
     })
   },
   submitAnswer:function(e){
-
-    // if(!matchInfo ||  !matchInfo.itemId){
-    //   wx.showToast({
-    //     title: '请先竞猜淘汰题',
-    //     icon: 'none',  //图标，支持"success"、"loading"
-    //     mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
-    //   })
-    //   return
-    // }
-
     if(substatus == 2 ){
       return
     }
 
-    const { matchInfo, pList } = this.data
+    const { matchInfo, pList, bPlist } = this.data;
+    const isMatchAnswerValid = +matchInfo.selectAnswerId > -1;
+    const isBplistAnswerValid = bPlist.reduce((acc, item) => {
+      return acc && +item.selectAnswerId > -1
+    }, true)
+    if(!isMatchAnswerValid || !isBplistAnswerValid){
+      wx.showToast({
+        title: '请先竞猜淘汰题',
+        icon: 'none',  //图标，支持"success"、"loading"
+        mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false
+      })
+    }
+
     let answerList = [{
       itemId: +matchInfo.itemId,
       answerId: +matchInfo.selectAnswerId,
       type: 0
     }];
 
+    bPlist.forEach(item => {
+      answerList.push({
+        itemId: +item.itemId,
+        answerId: +item.selectAnswerId,
+        type: 0
+      })
+    });
 
     pList.forEach(item => {
       answerList.push({
