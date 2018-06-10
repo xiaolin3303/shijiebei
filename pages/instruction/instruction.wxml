@@ -70,6 +70,21 @@
         <view>(2).</view>
         <view >团队：每个主题战场每个战队初始分是0，每个队员积分之和为每个战队的总积分，每个主题战场选出一个得分最高的战队为优胜战队</view>
     </view>
+    <view class="fwbold mt20">奖品方案</view>
+    <view class="mt10 fwbold">个人争霸赛 - 小组赛个人积分</view>
+    <image class="mt10" src="/assets/prize-1.png" style="width:610rpx;height:462rpx;margin-left:auto;margin-right:auto"></image>
+    <view class="mt10 fwbold">个人争霸赛 - 淘汰赛个人积分</view>
+    <image class="mt10" src="/assets/prize-2.png" style="width:610rpx;height:473rpx;margin-left:auto;margin-right:auto"></image>    
+    <view class="mt10 fwbold">个人争霸赛 - 冠军竞猜</view>
+    <view class="mt10">·获奖名额不限；奖品：现金18888元（奖金池）</view>    
+    <view class="mt10 fwbold">刺激战场 - 小组赛六场</view>
+    <view class="mt10">·奖项：冠军；名额：6个团队；奖品：团队奖金2000元+FIFA 世界杯Glider足球/人</view>
+    <view class="mt10 fwbold">刺激战场 - 淘汰赛四场</view>
+    <view class="mt10">·奖项：冠军；名额：4个团队；奖品：团队奖金3000元+adidas世界杯定制国家队球衣/人</view>
+    <view class="mt10 fwbold">趣味奖项 - 我们不一样</view>
+    <view class="mt10">·奖项：个人争霸赛中，小组赛与淘汰赛两个阶段中的排名倒数30位；名额：60人；奖品：腾讯定制世界杯主题冰箱贴一套/人</view>
+    <view class="mt10 fwbold">趣味奖项 - 我们很淡定</view>
+    <view class="mt10">·奖项：刺激战场每场最先被淘汰的一个团队；名额：10个团队；奖品：腾讯定制世界杯主题钥匙扣一套/人</view>
 
   </view>
   </view>

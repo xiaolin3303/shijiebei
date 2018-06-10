@@ -52,9 +52,9 @@
     <view class="mt40 user-list">
       <view class="mt20 ft12 tac">猜中人员名单</view>
       <view class="list mt20">
-        <view class="user row" wx:for="{{win_user_id}}" wx:for-index="index" wx:for-item="user" wx:key="user">
+        <view class="user row middle" wx:for="{{win_user_id}}" wx:for-index="index" wx:for-item="user" wx:key="user">
           <image class="avatar vam mr30 col-auto"></image>
-          <view class="col text-overflow">{{user.user_id}}</view>
+          <view class="col text-overflow mr10">{{user.user_id}}</view>
         </view>
       </view>
     </view>
