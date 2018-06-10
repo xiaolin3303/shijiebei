@@ -1,9 +1,10 @@
 //index.js
 //获取应用实例
 const Host = require("../../../config/host.config");
-const username = wx.getStorageSync('username');
+//const username = wx.getStorageSync('username');
 const getData = require("../../../model/dataModel");
 const app = getApp();
+const username = "carlsonlin"
 
 Page({
   data: {
@@ -57,7 +58,8 @@ Page({
     getData(
       battleUrl,
       {
-        groupId,
+        groupId:9292 ,
+        userId : username
       },
       'get',
       (res) => {

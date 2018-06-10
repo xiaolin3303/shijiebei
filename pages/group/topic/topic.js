@@ -5,6 +5,7 @@ const app = getApp();
 const Host = require("../../../config/host.config"); 
 const username = wx.getStorageSync('username');
 const getData = require("../../../model/dataModel");
+//const username ="carlsonlin"
 
 Page({
   data: {
@@ -30,7 +31,7 @@ Page({
     this.setData({
       battleId
     })
-    this.getGroupBetList(battleId ,1,-1);
+    this.getGroupBetList(battleId, 1, -1);
     this.getGroupInfo();
 
   },
@@ -47,17 +48,8 @@ Page({
       },
       'get',
       (res) => {
-        const blist  = res.data.bList;
-        
-        // blist[0].correctAnswer = -1;
-        // blist[0].alreadyAnswer = 0;
-        // blist[1].correctAnswer = -1;
-        // blist[1].alreadyAnswer = 0;
-
+        const blist  = res.data.bList;     
         const battleInfo = res.data.battleInfo;
-
-        // res.data.qList[0].correctAnswer = -1;
-        // res.data.qList[0].alreadyAnswer = 0;
 
         const pList = res.data.qList.map(item => {
           let answerSummary = Object.keys(item.answerSummary).map(key => ({
@@ -132,12 +124,15 @@ Page({
 
         
         if(status == -1){
-
           const currentRound = battleInfo.filter(item => {
              return item.status == 1 ;
           })
           currentTab = currentRound[0].rounds;
           currentStatus = currentRound[0].status ;
+          if (currentTab !== roundsId) {
+            this.getGroupBetList(battleId, currentTab, currentStatus)
+            return
+          }
         }else {
           [currentTab,currentStatus] = [roundsId,status];
         }
@@ -157,10 +152,13 @@ Page({
   getGroupInfo:function(){
 
     const groupUrl = `${Host.service}/GetGroupInfo?`;
+    const {battleId} = this.data ;
+
     getData(
       groupUrl,
       {
         userId: username,
+        battleId
       },
       'get',
       (res) => {
@@ -261,6 +259,8 @@ Page({
     })
   },
   submitAnswer:function(e){
+
+    const {substatus} = e.currentTarget.dataset;
     if(substatus == 2 ){
       return
     }

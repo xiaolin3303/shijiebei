@@ -13,14 +13,14 @@
         </view>
         
         <image src="{{battle.status == 1 ? battle.picture : battle.grayPicture}}" class="mt5 caption-figure {{battle.status == 1 ? 'active' : ''}} {{battle.status == 0 || battle.status == 2? 'gray-icon' : '' }}  {{battle.status !== 2 ? 'middle' : ''}}"></image>
-        <view class="row ft20 {{battle.status == 2 ?  '' : 'none'}}">
+        <view class="row ft20  mt20 {{battle.status == 2 ?  '' : 'none'}}">
           <view class="col">
               <view class="tac">队伍积分</view>
-              <view class="tac">20</view>
+              <view class="tac">{{battle.groupScore}}</view>
           </view>
           <view class="col">
               <view class="tac">个人积分</view>
-              <view class="tac">20</view>
+              <view class="tac">{{battle.personScore}}</view>
           </view>
         </view>
       </view>
@@ -31,7 +31,7 @@
         截止时间: {{ battle.displayEndTime }}
       </view>
       <view wx:else class="ft20 row bottom" bindtap="gotoRnak">
-        <view class="col">第五名</view>
+        <view class="col">第{{battle.rank}}名</view>
         <view class="col tar">查看排名</view>
       </view>
     </view>
